@@ -17,23 +17,22 @@ jobs:
         uses: actions/checkout@v2  # Mengambil kode sumber dari repository
 
       - name: Set up Python
-        uses: actions/setup-python@v2  # Mengatur Python versi 3.9
+        uses: actions/setup-python@v2  # Mengatur versi Python
         with:
-          python-version: '3.10'
+          python-version: '3.9'  # Versi Python yang digunakan
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip  # Mengupgrade pip
-          pip install -r requirements.txt  # Menginstall dependencies dari requirements.txt
+          pip install -r requirements.txt  # Menginstall dependensi dari requirements.txt
 
       - name: Run tests
-        run: |
-          pytest tests/  # Menjalankan test dengan pytest di folder 'tests'
+        run: pytest tests/  # Menjalankan pytest di folder tests
 
   deploy:
     runs-on: ubuntu-latest  # Menjalankan pada lingkungan Ubuntu
     needs: build  # Menunggu job 'build' selesai sebelum melanjutkan deployment
-    if: github.ref == 'refs/heads/main'  # Deployment hanya pada branch main
+    if: github.ref == 'refs/heads/main'  # Deployment hanya dijalankan di branch 'main'
 
     steps:
       - name: Checkout repository
@@ -41,16 +40,15 @@ jobs:
 
       - name: Deploy to server
         env:
-          SERVER_IP: ${{ secrets.SERVER_IP }}  # Menyimpan IP server sebagai Secret
-          SERVER_USER: ${{ secrets.SERVER_USER }}  # Menyimpan user server sebagai Secret
-          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}  # Menyimpan password server sebagai Secret
+          SERVER_IP: ${{ secrets.SERVER_IP }}  # IP server dari secrets
+          SERVER_USER: ${{ secrets.SERVER_USER }}  # User server dari secrets
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}  # Password server dari secrets
         run: |
           # Menggunakan SSH untuk melakukan deployment ke server
           sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER_IP << 'EOF'
-            cd /path/to/your/project  # Ganti dengan path proyek Anda di server
+            cd /path/to/your/project  # Ganti dengan path project kamu di server
             git pull origin main  # Menarik perubahan terbaru dari branch main
-            source venv/bin/activate  # Aktivasi virtual environment jika menggunakan
-            pip install -r requirements.txt  # Install dependencies
-            # Restart aplikasi jika diperlukan (misalnya menggunakan systemd)
-            sudo systemctl restart your_app.service  # Ganti dengan service yang sesuai
+            source venv/bin/activate  # Aktifkan virtual environment
+            pip install -r requirements.txt  # Install dependensi terbaru
+            sudo systemctl restart your_app.service  # Restart service aplikasi
           EOF
