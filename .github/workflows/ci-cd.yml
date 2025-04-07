@@ -1,0 +1,56 @@
+name: CI/CD for Todo App
+
+on:
+  push:
+    branches:
+      - main  # Menjalankan pipeline pada setiap push ke branch 'main'
+  pull_request:
+    branches:
+      - main  # Menjalankan pipeline pada setiap pull request ke branch 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Menjalankan pada lingkungan Ubuntu
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Mengambil kode sumber dari repository
+
+      - name: Set up Python
+        uses: actions/setup-python@v2  # Mengatur Python versi 3.9
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip  # Mengupgrade pip
+          pip install -r requirements.txt  # Menginstall dependencies dari requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest tests/  # Menjalankan test dengan pytest di folder 'tests'
+
+  deploy:
+    runs-on: ubuntu-latest  # Menjalankan pada lingkungan Ubuntu
+    needs: build  # Menunggu job 'build' selesai sebelum melanjutkan deployment
+    if: github.ref == 'refs/heads/main'  # Deployment hanya pada branch main
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Mengambil kode sumber dari repository
+
+      - name: Deploy to server
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}  # Menyimpan IP server sebagai Secret
+          SERVER_USER: ${{ secrets.SERVER_USER }}  # Menyimpan user server sebagai Secret
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}  # Menyimpan password server sebagai Secret
+        run: |
+          # Menggunakan SSH untuk melakukan deployment ke server
+          sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER_IP << 'EOF'
+            cd /path/to/your/project  # Ganti dengan path proyek Anda di server
+            git pull origin main  # Menarik perubahan terbaru dari branch main
+            source venv/bin/activate  # Aktivasi virtual environment jika menggunakan
+            pip install -r requirements.txt  # Install dependencies
+            # Restart aplikasi jika diperlukan (misalnya menggunakan systemd)
+            sudo systemctl restart your_app.service  # Ganti dengan service yang sesuai
+          EOF
