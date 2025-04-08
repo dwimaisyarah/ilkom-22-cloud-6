@@ -25,5 +25,5 @@ jobs:
 
       - name: Run tests
         env:
-            PYTHONPATH: ./coba
+          PYTHONPATH: .
         run: pytest coba/tests/
