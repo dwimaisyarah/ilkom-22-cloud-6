@@ -1,54 +1,29 @@
-name: CI/CD for Todo App
+name: CI/CD untuk FastAPI Todo App
 
 on:
   push:
-    branches:
-      - main  # Menjalankan pipeline pada setiap push ke branch 'main'
+    branches: [main]
   pull_request:
-    branches:
-      - main  # Menjalankan pipeline pada setiap pull request ke branch 'main'
+    branches: [main]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Menjalankan pada lingkungan Ubuntu
+  test:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2  # Mengambil kode sumber dari repository
+      - name: Checkout kode
+        uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v2  # Mengatur versi Python
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.9'  # Versi Python yang digunakan
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip  # Mengupgrade pip
-          pip install -r requirements.txt  # Menginstall dependensi dari requirements.txt
+          pip install -r requirements.txt
 
       - name: Run tests
-        run: pytest tests/  # Menjalankan pytest di folder tests
-
-  deploy:
-    runs-on: ubuntu-latest  # Menjalankan pada lingkungan Ubuntu
-    needs: build  # Menunggu job 'build' selesai sebelum melanjutkan deployment
-    if: github.ref == 'refs/heads/main'  # Deployment hanya dijalankan di branch 'main'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2  # Mengambil kode sumber dari repository
-
-      - name: Deploy to server
         env:
-          SERVER_IP: ${{ secrets.SERVER_IP }}  # IP server dari secrets
-          SERVER_USER: ${{ secrets.SERVER_USER }}  # User server dari secrets
-          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}  # Password server dari secrets
-        run: |
-          # Menggunakan SSH untuk melakukan deployment ke server
-          sshpass -p $SERVER_PASSWORD ssh $SERVER_USER@$SERVER_IP << 'EOF'
-            cd /path/to/your/project  # Ganti dengan path project kamu di server
-            git pull origin main  # Menarik perubahan terbaru dari branch main
-            source venv/bin/activate  # Aktifkan virtual environment
-            pip install -r requirements.txt  # Install dependensi terbaru
-            sudo systemctl restart your_app.service  # Restart service aplikasi
-          EOF
+            PYTHONPATH: ./coba
+        run: pytest coba/tests/
