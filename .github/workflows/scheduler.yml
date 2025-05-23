@@ -1,0 +1,25 @@
+name: Notifikasi Tugas
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # setiap 15 menit
+  workflow_dispatch:
+
+jobs:
+  kirim-notifikasi:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Jalankan pengecekan deadline
+      run: python cek_deadline.py

@@ -1,17 +1,18 @@
 # backend/database.py
-import json
-from pathlib import Path
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-DATA_FILE = Path("backend/data/tasks.json")
+SQLALCHEMY_DATABASE_URL = "sqlite:///./task.db"
 
-if not DATA_FILE.exists():
-    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
-    DATA_FILE.write_text("[]")
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+Base = declarative_base()
 
-def load_tasks():
-    with open(DATA_FILE, 'r') as f:
-        return json.load(f)
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-def save_tasks(tasks):
-    with open(DATA_FILE, 'w') as f:
-        json.dump(tasks, f, indent=2)
+        

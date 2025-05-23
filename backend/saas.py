@@ -1,13 +1,13 @@
 import httpx
 
-def send_notification(title):
+def send_notification(judul):
     token = "azy34pcfkef4pr489wq5d4w7nyfe8z"
     user_key = "u52wtnz8ouv4k446v1dpgq42jz2ygo"
     url = "https://api.pushover.net/1/messages.json"
     payload = {
         "token": token,
         "user": user_key,
-        "message": title
+        "message": judul
     }
 
     headers = {
