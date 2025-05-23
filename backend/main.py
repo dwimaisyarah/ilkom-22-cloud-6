@@ -35,11 +35,13 @@ def create_task(task: TaskCreate, db: Session = Depends(get_db)):
         if new_task.pushover:
             print("Mengirim notifikasi Pushover...")
             saas.send_notification(new_task.judul)
+            # Tandai bahwa notifikasi telah dikirim
+            crud.update_task(db, new_task.id, TaskUpdate(notifikasi_terkirim=True))
         return new_task
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Gagal menambahkan task: {str(e)}")
 
-# Perbarui task (bisa title, done, atau keduanya)# Perbarui task (bisa judul, deskripsi, done, pushover, deadline)
+# Perbarui task (bisa judul, deskripsi, done, pushover, deadline, dll.)
 @app.put("/tasks/{task_id}", response_model=Task)
 def update_task(task_id: int, task_update: TaskUpdate, db: Session = Depends(get_db)):
     updated_task = crud.update_task(db, task_id, task_update)
@@ -48,7 +50,6 @@ def update_task(task_id: int, task_update: TaskUpdate, db: Session = Depends(get
     return updated_task
 
 
-# Hapus task
 @app.delete("/tasks/{task_id}")
 def delete_task(task_id: int, db: Session = Depends(get_db)):
     deleted_task = crud.delete_task(db, task_id)

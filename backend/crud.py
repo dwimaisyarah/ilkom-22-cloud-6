@@ -6,7 +6,10 @@ def get_all_tasks(db: Session):
     return db.query(Task).all()
 
 def add_task(db: Session, task_data: TaskCreate):
-    new_task = Task(**task_data.dict())
+    # Pastikan kolom notifikasi diinisialisasi False saat buat task
+    data = task_data.dict()
+    data['notifikasi'] = False
+    new_task = Task(**data)
     db.add(new_task)
     db.commit()
     db.refresh(new_task)
@@ -25,7 +28,9 @@ def update_task(db: Session, task_id: int, task_data: TaskUpdate):
             task.done = task_data.done
         if hasattr(task_data, "pushover") and task_data.pushover is not None:
             task.pushover = task_data.pushover
-    
+        if hasattr(task_data, "notifikasi") and task_data.notifikasi is not None:
+            task.notifikasi = task_data.notifikasi_terkirim
+
         db.commit()
         db.refresh(task)
     return task

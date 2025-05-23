@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from backend.models import Task, Base
 import saas
 
-DATABASE_URL = "sqlite:///backend/task.db"
+DATABASE_URL = "sqlite:///backend/tugas.db"
 
 # Setup DB session
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})

@@ -8,6 +8,7 @@ class TaskBase(BaseModel):
     deadline: Optional[datetime] = None
     done: Optional[bool] = False
     pushover: Optional[bool] = False
+    notifikasi: Optional[bool] = False 
 
 class TaskCreate(TaskBase):
     pass
@@ -18,6 +19,7 @@ class TaskUpdate(BaseModel):
     deadline: Optional[datetime] = None
     done: Optional[bool] = None
     pushover: Optional[bool] = None
+    notifikasi: Optional[bool] = None 
 
 class Task(TaskBase):
     id: int

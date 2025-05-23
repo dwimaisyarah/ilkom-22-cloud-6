@@ -11,3 +11,4 @@ class Task(Base):
     deadline = Column(DateTime, nullable=True)
     done = Column(Boolean, default=False)
     pushover = Column(Boolean, default=False)
+    notifikasi = Column(Boolean, default=False)
