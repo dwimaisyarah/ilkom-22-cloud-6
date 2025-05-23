@@ -23,4 +23,3 @@ jobs:
 
     - name: Run cek_deadline.py
       run: python backend/cek_deadline.py
-      working-directory: ./coba
