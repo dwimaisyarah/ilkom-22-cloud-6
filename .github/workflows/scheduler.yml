@@ -1,9 +1,12 @@
-name: Notifikasi Tugas
+name: CI Notifikasi Tugas
 
 on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
   schedule:
-    - cron: '*/2 * * * *'
-  workflow_dispatch:
+    - cron: '*/15 * * * *'
 
 jobs:
   kirim-notifikasi:
@@ -20,7 +23,7 @@ jobs:
 
     - name: Install dependencies
       run: pip install -r requirements.txt
-      
+
     - name: List isi folder backend
       run: ls -la backend
 
@@ -29,5 +32,4 @@ jobs:
 
     - name: Jalankan pengecekan deadline
       run: PYTHONPATH=. python backend/cek_deadline.py
-
 
