@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: pip install -r coba/requirements.txt
 
-    - name: Init DB (jika perlu)
+    - name: Init database (create tables)
       run: python coba/backend/init_db.py
 
     - name: Run cek_deadline.py
