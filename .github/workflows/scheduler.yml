@@ -2,7 +2,7 @@ name: Notifikasi Tugas
 
 on:
   schedule:
-    - cron: '*/15 * * * *'  # setiap 15 menit
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -20,6 +20,14 @@ jobs:
 
     - name: Install dependencies
       run: pip install -r requirements.txt
+
+    - name: Debug file
+      run: |
+        echo "Current dir: $(pwd)"
+        echo "List isi direktori:"
+        ls -lah
+        echo "Isi folder backend:"
+        ls -lah backend
 
     - name: Run cek_deadline.py
       run: python backend/cek_deadline.py
