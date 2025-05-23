@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean, DateTime
-from database import Base
+from backend.database import Base
+
 
 class Task(Base):
     __tablename__ = "tasks"
