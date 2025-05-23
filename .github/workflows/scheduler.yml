@@ -25,8 +25,9 @@ jobs:
       run: ls -la backend
 
     - name: Init database (create tables)
-      run: python backend/init_db.py
+      run: PYTHONPATH=. python backend/init_db.py
 
     - name: Jalankan pengecekan deadline
-      run: python backend/cek_deadline.py
+      run: PYTHONPATH=. python backend/cek_deadline.py
+
 
