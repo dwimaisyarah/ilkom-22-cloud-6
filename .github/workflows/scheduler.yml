@@ -19,15 +19,7 @@ jobs:
         python-version: '3.10'
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
-
-    - name: Debug file
-      run: |
-        echo "Current dir: $(pwd)"
-        echo "List isi direktori:"
-        ls -lah
-        echo "Isi folder backend:"
-        ls -lah backend
+      run: pip install -r coba/requirements.txt
 
     - name: Run cek_deadline.py
-      run: python backend/cek_deadline.py
+      run: python coba/backend/cek_deadline.py
