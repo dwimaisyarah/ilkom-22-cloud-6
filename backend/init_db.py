@@ -1,6 +1,5 @@
-# init_db.py
-from database import engine, Base
-from models import Task
+from backend.database import engine, Base
+from backend.models import Task
 
 def init_db():
     Base.metadata.create_all(bind=engine)
