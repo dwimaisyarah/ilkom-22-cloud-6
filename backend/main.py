@@ -3,9 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 
-import crud, saas
-from database import get_db
-from schemas import Task,TaskCreate, TaskUpdate
+from backend import crud, saas
+from backend.database import get_db
+from backend.schemas import Task, TaskCreate, TaskUpdate
 
 app = FastAPI()
 
