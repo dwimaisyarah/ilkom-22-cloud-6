@@ -22,5 +22,5 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Run cek_deadline.py
-      run: python ./coba/backend/cek_deadline.py
-
+      run: python backend/cek_deadline.py
+      working-directory: ./coba
