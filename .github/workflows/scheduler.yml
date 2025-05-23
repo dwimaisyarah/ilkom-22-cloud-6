@@ -22,7 +22,8 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Init database (create tables)
-      run: python coba/backend/init_db.py
+      run: python backend/init_db.py
 
-    - name: Run cek_deadline.py
-      run: python coba/backend/cek_deadline.py
+    - name: Jalankan pengecekan deadline
+      run: python backend/cek_deadline.py
+
