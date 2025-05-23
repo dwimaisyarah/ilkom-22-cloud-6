@@ -1,7 +1,7 @@
 import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Task, Base
+from backend.models import Task, Base
 import saas
 
 DATABASE_URL = "sqlite:///backend/task.db"
