@@ -21,5 +21,6 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    - name: Jalankan pengecekan deadline
-      run: python cek_deadline.py
+    - name: Run cek_deadline.py
+      run: python ./coba/backend/cek_deadline.py
+
