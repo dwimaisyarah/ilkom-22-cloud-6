@@ -2,11 +2,12 @@ from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.responses import JSONResponse, FileResponse
 from sqlalchemy.orm import Session
 from typing import List
 from jose import jwt, JWTError
 from datetime import datetime, timedelta
-from fastapi.responses import JSONResponse
+import os
 
 from backend import crud, saas, config
 from backend.database import get_db
@@ -25,7 +26,16 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 app = FastAPI()
 
+# Mount static files (akses via /static)
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
+app.mount("/css", StaticFiles(directory="frontend/css"), name="css")
+app.mount("/js", StaticFiles(directory="frontend/js"), name="js")
+
+
+# Tampilkan index.html saat akses root "/"
+@app.get("/", include_in_schema=False)
+def serve_index():
+    return FileResponse(os.path.join("frontend", "index.html"))
 
 # ==== Middleware CORS ====
 app.add_middleware(
@@ -60,15 +70,9 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     user = crud.get_user_by_username(db, username)
     if not user:
         raise credentials_exception
-    return user  # langsung return ORM model, schema User akan konversi otomatis
+    return user
 
-# ==== Root ====
-@app.get("/")
-def read_root():
-    return {"message": "API is running"}
-
-# ==== Auth ====
-
+# ==== Auth Endpoints ====
 @app.get("/me", response_model=UserSchema)
 def read_users_me(current_user: UserSchema = Depends(get_current_user)):
     return current_user
@@ -94,7 +98,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
         "user_id": user.id
     }
 
-# ==== Task CRUD ====
+# ==== Task Endpoints ====
 @app.get("/all-tasks", response_model=List[Task])
 def read_tasks(db: Session = Depends(get_db), current_user: UserSchema = Depends(get_current_user)):
     return crud.get_tasks_by_user(db, user_id=current_user.id)
@@ -105,7 +109,6 @@ def get_task(task_id: int, db: Session = Depends(get_db), user: UserSchema = Dep
     if not task:
         raise HTTPException(status_code=404, detail="Tugas tidak ditemukan")
     return task
-
 
 @app.post("/add-task", response_model=Task, response_model_exclude_none=True)
 async def create_task(
@@ -129,13 +132,11 @@ async def create_task(
         return new_task
 
     except Exception as e:
-        # Log error di server
         print(f"Error create_task: {e}")
         return JSONResponse(
             status_code=500,
             content={"detail": f"Gagal menambahkan task: {str(e)}"}
         )
-    
 
 @app.put("/tasks/{task_id}", response_model=Task)
 def update_task(task_id: int, task_update: TaskUpdate, db: Session = Depends(get_db), current_user: UserSchema = Depends(get_current_user)):
@@ -150,3 +151,12 @@ def delete_task(task_id: int, db: Session = Depends(get_db), current_user: UserS
     if not deleted_task:
         raise HTTPException(status_code=404, detail="Task not found")
     return {"message": "Task deleted"}
+
+# ==== Serve HTML Files (signup.html, login.html, etc.) ====
+
+@app.get("/{page_name}.html", include_in_schema=False)
+def serve_html_page(page_name: str):
+    file_path = os.path.join("frontend", f"{page_name}.html")
+    if os.path.exists(file_path):
+        return FileResponse(file_path, media_type='text/html')
+    raise HTTPException(status_code=404, detail="Page not found")

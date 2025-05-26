@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Ambil semua tugas dari endpoint /tasks
   async function fetchTasks() {
     try {
-      const response = await fetch("http://localhost:8000/all-tasks", {
+      const response = await fetch("http://localhost:5500/all-tasks", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (!task) return alert("Task tidak ditemukan");
 
         try {
-          await fetch(`http://localhost:8000/tasks/${id}`, {
+          await fetch(`http://localhost:5500/tasks/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (!confirm("Yakin ingin menghapus tugas ini?")) return;
 
         try {
-          await fetch(`http://localhost:8000/tasks/${id}`, {
+          await fetch(`http://localhost:5500/tasks/${id}`, {
             method: "DELETE",
             headers: {
               Authorization: `Bearer ${token}`,

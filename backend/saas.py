@@ -1,7 +1,7 @@
 import httpx
 
 def send_notification(judul: str, user_key: str):
-    token = "azy34pcfkef4pr489wq5d4w7nyfe8z"
+    token = "ar1fcrfigf1rbtjsrjsa2nfkzzfst9"
     url = "https://api.pushover.net/1/messages.json"
     payload = {
         "token": token,

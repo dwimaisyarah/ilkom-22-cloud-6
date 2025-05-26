@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const doneInput = document.getElementById("done");
 
   try {
-    const response = await fetch(`http://localhost:8000/ambil-tugas/${taskId}`, {
+    const response = await fetch(`http://localhost:5500/ambil-tugas/${taskId}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     if (!response.ok) throw new Error("Gagal mengambil data tugas");
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:8000/tasks/${taskId}`, {
+      const res = await fetch(`http://localhost:5500/tasks/${taskId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

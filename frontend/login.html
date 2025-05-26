@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Log In | DayList</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/login.css">
+  <!-- Ganti path CSS dengan prefix /static -->
+  <link rel="stylesheet" href="/static/css/login.css">
 </head>
 <body>
   <div class="container">
@@ -32,8 +33,8 @@
     </div>
   </div>
 
-  <!-- Script -->
-  <script src="js/auth.js"></script>
+  <!-- Ganti path JS dengan prefix /static -->
+  <script src="/static/js/auth.js"></script>
   <script>
     document.getElementById("loginForm").addEventListener("submit", async function(e) {
       e.preventDefault();

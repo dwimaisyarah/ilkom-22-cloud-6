@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     return;
   }
 
-  // Verifikasi token
+  // Verifikasi token saat halaman dimuat
   try {
-    const response = await fetch("http://127.0.0.1:8000/me", {
+    const response = await fetch("http://127.0.0.1:5500/me", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`
@@ -27,6 +27,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   const form = document.getElementById("task-form");
+  if (!form) {
+    console.error("Form task tidak ditemukan!");
+    return;
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -41,32 +46,38 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/add-task", {
+      const response = await fetch("http://127.0.0.1:5500/add-task", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-          judul: judul,
-          deskripsi: deskripsi,
-          deadline: deadline,
+          judul,
+          deskripsi,
+          deadline,
           pushover: true
         }),
       });
 
+      if (response.status === 401) {
+        alert("Session Anda telah habis. Silakan login kembali.");
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("user_id");
+        window.location.href = "login.html";
+        return;
+      }
+
       if (response.ok) {
-        console.log("Task berhasil ditambahkan");
         alert("Task berhasil ditambahkan!");
         window.location.href = "task.html";
       } else {
         const errorData = await response.json();
-        console.error("Gagal menambahkan task:", errorData.detail || response.statusText);
         alert("Gagal menambahkan task: " + (errorData.detail || response.statusText));
       }
     } catch (error) {
-      console.error("Error saat menambahkan task:", error);
       alert("Terjadi kesalahan saat menambahkan task.");
+      console.error("Error saat menambahkan task:", error);
     }
   });
 });

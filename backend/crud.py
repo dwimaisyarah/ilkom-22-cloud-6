@@ -3,6 +3,31 @@ from backend.models import Task, User
 from backend.schemas import TaskCreate, TaskUpdate, UserCreate
 from typing import Optional
 from passlib.context import CryptContext
+import requests
+
+# === Password Hashing ===
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def get_password_hash(password: str) -> str:
+    return pwd_context.hash(password)
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)
+
+# === Pushover Notification ===
+def send_pushover_notification(user_key: str, title: str, message: str):
+    payload = {
+        "token": "YOUR_PUSHOVER_APP_TOKEN",   # Ganti dengan app token milikmu
+        "user": user_key,
+        "title": title,
+        "message": message
+    }
+    try:
+        response = requests.post("https://api.pushover.net/1/messages.json", data=payload)
+        print("Pushover status:", response.status_code, response.text)
+    except Exception as e:
+        print("Error sending Pushover notification:", str(e))
+
 # ===== TASK CRUD =====
 
 def get_all_tasks(db: Session):
@@ -14,7 +39,6 @@ def get_task_by_id(db: Session, task_id: int):
 def get_tasks_by_user(db: Session, user_id: int):
     return db.query(Task).filter(Task.user_id == user_id).all()
 
-# crud.py
 def add_task(db: Session, task_data: TaskCreate, user_id: int):
     new_task = Task(
         judul=task_data.judul,
@@ -22,12 +46,23 @@ def add_task(db: Session, task_data: TaskCreate, user_id: int):
         deadline=task_data.deadline,
         done=task_data.done or False,
         pushover=task_data.pushover,
-        notifikasi=False,  # default false di awal
+        notifikasi=False,
         user_id=user_id,
     )
     db.add(new_task)
     db.commit()
     db.refresh(new_task)
+
+    # Kirim notifikasi Pushover jika diaktifkan
+    if task_data.pushover:
+        user = get_user_by_id(db, user_id)
+        if user and user.pushover_user_key:
+            send_pushover_notification(
+                user_key=user.pushover_user_key,
+                title=f"Tugas Baru: {new_task.judul}",
+                message=new_task.deskripsi or "Tidak ada deskripsi"
+            )
+
     return new_task
 
 def update_task(db: Session, task_id: int, task_data: TaskUpdate):
@@ -55,15 +90,6 @@ def delete_task(db: Session, task_id: int):
         db.delete(task)
         db.commit()
     return task
-
-# === Konfigurasi hashing password ===
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-def get_password_hash(password: str) -> str:
-    return pwd_context.hash(password)
-
-def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return pwd_context.verify(plain_password, hashed_password)
 
 # ===== USER CRUD =====
 

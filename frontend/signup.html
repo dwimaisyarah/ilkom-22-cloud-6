@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Register | DayList</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/signup.css">
+  <!-- Ubah href css jadi mulai dari /static/ -->
+  <link rel="stylesheet" href="/static/css/signup.css">
 </head>
 <body>
   <div class="container">
@@ -17,9 +18,9 @@
         Biar hidup lebih ringan, santai, dan terkendali.
       </p>
       <p>
-    <strong>Download aplikasi <a href="https://pushover.net/" target="_blank">Pushover</a> terlebih dahulu</strong><br>
-      untuk menerima notifikasi langsung ke HP atau perangkatmu.
-    </p>
+        <strong>Download aplikasi <a href="https://pushover.net/" target="_blank">Pushover</a> terlebih dahulu</strong><br>
+        untuk menerima notifikasi langsung ke HP atau perangkatmu.
+      </p>
       <a href="login.html" class="btn-outline">Log In</a>
     </div>
 
@@ -40,8 +41,8 @@
     </div>
   </div>
 
-  <!-- Script -->
-  <script src="js/auth.js"></script>
+  <!-- Ubah src js jadi mulai dari /static/ -->
+  <script src="/static/js/auth.js"></script>
   <script>
     const form = document.getElementById("registerForm");
     form.addEventListener("submit", async (e) => {
