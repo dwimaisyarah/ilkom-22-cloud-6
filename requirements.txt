@@ -5,3 +5,4 @@ httpx
 pytest
 sqlalchemy
 python-jose
+passlib
