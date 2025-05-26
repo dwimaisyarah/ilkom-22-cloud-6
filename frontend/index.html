@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DayList | Catat. Centang. Chill</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">🟩 <span>DayList</span></div>
+    <nav>
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="task.html">My Task</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="login.html" id="login-btn">Log In</a></li>
+        <li><a href="signup.html" id="signup-btn">Sign Up</a></li>
+        <li><a href="#" id="logout-btn" style="display:none;">Log Out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Catat. Centang. Chill</h1>
+    <p>Biar semua urusan kelar tanpa drama</p>
+    <a href="add_task.html" class="btn">Add Task</a>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const token = localStorage.getItem("access_token");
+      const loginBtn = document.getElementById("login-btn");
+      const signupBtn = document.getElementById("signup-btn");
+      const logoutBtn = document.getElementById("logout-btn");
+
+      if (token) {
+        // Kalau sudah login
+        loginBtn.style.display = "none";
+        signupBtn.style.display = "none";
+        logoutBtn.style.display = "inline";
+
+        logoutBtn.addEventListener("click", function () {
+          localStorage.removeItem("access_token");
+          window.location.href = "index.html";
+        });
+      } else {
+        // Kalau belum login
+        loginBtn.style.display = "inline";
+        signupBtn.style.display = "inline";
+        logoutBtn.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

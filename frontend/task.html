@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Task - DayList</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">DayList</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="task.html" class="active">My Task</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Konten Utama -->
+  <main class="task-container">
+    <h1>My Task</h1>
+
+    <!-- Pencarian dan filter -->
+    <div class="task-controls">
+      <input type="text" id="search-task" placeholder="Cari tugas" />
+      <div class="filter-buttons">
+        <button id="add-task-btn">Add Task</button>
+        <button class="filter-btn active" data-filter="all">Semua tugas</button>
+        <button class="filter-btn" data-filter="done">Sudah selesai</button>
+        <button class="filter-btn" data-filter="not_done">Belum selesai</button>
+      </div>
+    </div>
+
+    <!-- Daftar tugas akan dirender di sini -->
+    <div id="task-list" class="task-list"></div>
+  </main>
+
+  <!-- Script -->
+  <script>
+    // Arahkan ke halaman tambah task saat tombol ditekan
+    document.addEventListener("DOMContentLoaded", function () {
+      const addBtn = document.getElementById("add-task-btn");
+      if (addBtn) {
+        addBtn.addEventListener("click", function () {
+          window.location.href = "add_task.html";
+        });
+      }
+    });
+  </script>
+  <script src="js/task_list.js"></script>
+</body>
+
+</html>

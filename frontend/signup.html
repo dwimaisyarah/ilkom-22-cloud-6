@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | DayList</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <h2>Mulai Harimu Lebih Teratur</h2>
+      <p>
+        Gak perlu lagi drama tugas lupa atau numpuk<br>
+        Yuk, catat semuanya di <strong>DayList</strong><br>
+        Biar hidup lebih ringan, santai, dan terkendali.
+      </p>
+      <a href="login.html" class="btn-outline">Log In</a>
+    </div>
+
+    <div class="right-panel">
+      <h2>Sign Up</h2>
+      <form id="registerForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+
+        <label for="pushover">User Key Pushover</label>
+        <input type="text" id="pushover">
+
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="js/auth.js"></script>
+  <script>
+    const form = document.getElementById("registerForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const pushover = document.getElementById("pushover").value;
+
+      await registerUser(username, password, pushover);
+    });
+  </script>
+</body>
+</html>

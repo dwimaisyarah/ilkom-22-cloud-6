@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Log In | DayList</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!--<link rel="stylesheet" href="style-login.css"> -->
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <h2>Welcome back!</h2>
+      <p>
+        Yuk lanjut centang tugasmu hari ini<br>
+        Produktif itu gak harus ribet.
+      </p>
+      <a href="signup.html" class="btn-outline">Sign Up</a>
+    </div>
+
+    <div class="right-panel">
+      <h2>Log In</h2>
+      <form id="loginForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+
+        <button type="submit">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      await loginUser(username, password);
+    });
+  </script>
+</body>
+</html>

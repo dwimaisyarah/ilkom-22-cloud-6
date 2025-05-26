@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DayList | About</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">🟩 <span>DayList</span></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="task.html">My Task</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="login.html" id="login-link">Log In</a></li>
+        <li><a href="signup.html" id="signup-link">Sign Up</a></li>
+        <li><a href="#" onclick="logoutUser()" id="logout-link" style="display: none;">Log Out</a></li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <main class="about-content" style="padding: 2rem;">
+    <h1>Tentang Kami</h1>
+    <p>To Do List App adalah aplikasi sederhana yang dirancang untuk membantu pengguna dalam mengatur, mencatat, dan menyelesaikan tugas harian mereka secara lebih efisien. Aplikasi ini dibuat sebagai bagian dari Tugas Akhir Mata Kuliah Cloud Computing.</p>
+
+    <p>Melalui aplikasi ini, kami berharap pengguna dapat dengan mudah mengelola waktu dan produktivitas, baik untuk keperluan pribadi maupun profesional.</p>
+
+    <h3>Kelompok 6 – Pembuat Aplikasi:</h3>
+    <ul>
+      <li>Bayyinahtun Dwi Sumatri</li>
+      <li>Friska Amelia</li>
+      <li>Kumala Dewi</li>
+      <li>Dwi Cahya Maisyarah</li>
+      <li>Nurul Khofifah Hasyim</li>
+      <li>Selin Ramadhani</li>
+      <li>Putu Linda Andaniari</li>
+    </ul>
+
+    <p>Kami mengembangkan aplikasi ini dengan semangat kolaborasi dan pembelajaran, serta menerapkan konsep dan teknologi cloud computing yang telah kami pelajari selama perkuliahan.</p>
+
+    <p>Terima kasih telah menggunakan aplikasi kami! 😊</p>
+  </main>
+  <script src="auth.js"></script>
+  <script>
+  // Fungsi logout lengkap
+  function logoutUser() {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("isLoggedIn");
+    // setelah logout, langsung ke halaman index
+    window.location.href = "index.html";
+  }
+
+  // Atur tampilan nav sesuai status login
+  const loginLink = document.getElementById("login-link");
+  const signupLink = document.getElementById("signup-link");
+  const logoutLink = document.getElementById("logout-link");
+
+  function updateNav() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    if (isLoggedIn) {
+      loginLink.style.display = "none";
+      signupLink.style.display = "none";
+      logoutLink.style.display = "inline-block";
+    } else {
+      loginLink.style.display = "inline-block";
+      signupLink.style.display = "inline-block";
+      logoutLink.style.display = "none";
+    }
+  }
+
+  // panggil updateNav supaya nav sesuai status login saat halaman dimuat
+  updateNav();
+</script>
+</body>
+</html>

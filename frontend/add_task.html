@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DayList | Add Task</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="logo">🟩 <span>DayList</span></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="task.html" class="active">My Task</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="form-section">
+    <h2>Plan Something New</h2>
+    <form id="task-form">
+      <label for="judul">Nama Tugas</label>
+      <input type="text" id="judul" name="judul" required>
+
+      <label for="deskripsi">Deskripsi Tugas</label>
+      <input type="text" id="deskripsi" name="deskripsi">
+
+      <label for="deadline">Deadline</label>
+      <input type="date" id="deadline" name="deadline">
+
+      <div class="btn-group">
+        <a href="index.html" class="btn-outline">Batal</a>
+        <button type="submit" class="btn" href="task.html">Add Task</button>
+      </div>
+    </form>
+  </section>
+
+  <script src="js/task.js"></script>
+</body>
+</html>

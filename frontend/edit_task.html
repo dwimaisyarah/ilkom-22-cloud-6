@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Tugas</title>
+</head>
+<body>
+  <h1>Edit Tugas</h1>
+  <form id="edit-task-form">
+    <label for="judul">Judul</label>
+    <input type="text" id="judul" name="judul" required />
+
+    <label for="deskripsi">Deskripsi</label>
+    <textarea id="deskripsi" name="deskripsi" rows="4" required></textarea>
+
+    <label for="deadline">Deadline</label>
+    <input type="date" id="deadline" name="deadline" />
+
+    <label>
+      <input type="checkbox" id="done" name="done" />
+      Selesai
+    </label>
+
+    <button type="submit" id="submit-btn">Simpan Perubahan</button>
+  </form>
+
+  <script src="js/edit_task.js"></script>
+</body>
+</html>
