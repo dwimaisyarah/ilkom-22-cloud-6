@@ -6,3 +6,4 @@ pytest
 sqlalchemy
 python-jose
 passlib
+python-dotenv
