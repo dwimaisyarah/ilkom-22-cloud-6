@@ -1,0 +1,105 @@
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Body */
+body {
+  background: linear-gradient(to right, #B2F7EF, #FFFFCC);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+header {
+  width: 100%;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent; /* bisa diganti jika mau */
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+/* Logo */
+.logo {
+  font-weight: 700;
+  font-size: 22px;
+  color: #111827;
+  display: flex;
+  align-items: center;
+}
+
+.logo span {
+  margin-left: 6px;
+}
+
+/* Navigation */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #111827;
+  font-weight: 500;
+  transition: 0.2s ease;
+  padding-bottom: 2px;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #10B981;
+  border-bottom: 2px solid #10B981;
+}
+
+/* Main content */
+main {
+  text-align: center;
+  margin-top: 250px; /* supaya tidak tertutup header yang fixed */
+  padding: 0 20px; /* supaya ada padding di layar kecil */
+  flex-grow: 1;
+}
+
+main h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #111827;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+}
+
+main p {
+  font-size: 16px;
+  color: #374151;
+  margin-bottom: 30px;
+}
+
+/* Button */
+.btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: #10B981;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:hover {
+  background-color: #059669;
+}

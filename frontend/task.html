@@ -5,7 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Task - DayList</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/daftarTask.css" />
 </head>
 
 <body>
@@ -13,9 +14,13 @@
   <nav class="navbar">
     <div class="logo">DayList</div>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
+       <li><a href="index.html">Home</a></li>
       <li><a href="task.html" class="active">My Task</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="login.html" id="login-btn">Log In</a></li>
+      <li><a href="signup.html" id="signup-btn">Sign Up</a></li>
+      <li><a href="#" id="logout-btn" style="display: none;">Log Out</a></li>
+      
     </ul>
   </nav>
 
@@ -51,6 +56,30 @@
     });
   </script>
   <script src="js/task_list.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const token = localStorage.getItem("access_token");
+    const loginBtn = document.getElementById("login-btn");
+    const signupBtn = document.getElementById("signup-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    if (token) {
+      loginBtn.style.display = "none";
+      signupBtn.style.display = "none";
+      logoutBtn.style.display = "inline";
+
+      logoutBtn.addEventListener("click", function () {
+        localStorage.removeItem("access_token");
+        window.location.href = "index.html";
+      });
+    } else {
+      loginBtn.style.display = "inline";
+      signupBtn.style.display = "inline";
+      logoutBtn.style.display = "none";
+    }
+  });
+</script>
+
 </body>
 
 </html>

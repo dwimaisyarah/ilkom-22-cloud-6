@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from jose import jwt, JWTError
 from datetime import datetime, timedelta
+from fastapi.responses import JSONResponse
 
 from backend import crud, saas, config
 from backend.database import get_db
@@ -29,8 +30,7 @@ app.mount("/static", StaticFiles(directory="frontend"), name="static")
 # ==== Middleware CORS ====
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500", "http://localhost:5500"],
-    #allow_origins=["*"],
+    allow_origins=["http://localhost:5500", "http://127.0.0.1:5500"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -60,7 +60,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     user = crud.get_user_by_username(db, username)
     if not user:
         raise credentials_exception
-    return user
+    return user  # langsung return ORM model, schema User akan konversi otomatis
 
 # ==== Root ====
 @app.get("/")
@@ -108,7 +108,7 @@ def get_task(task_id: int, db: Session = Depends(get_db), user: UserSchema = Dep
 
 
 @app.post("/add-task", response_model=Task, response_model_exclude_none=True)
-def create_task(
+async def create_task(
     task: TaskCreate,
     db: Session = Depends(get_db),
     current_user: UserSchema = Depends(get_current_user)
@@ -118,18 +118,24 @@ def create_task(
 
         if new_task.pushover and current_user.pushover_user_key:
             print("Kirim notif ke pushover...")
-            saas.send_notification(new_task.judul, current_user.pushover_user_key)
-            updated_task = crud.update_task(db, new_task.id, TaskUpdate(notifikasi=True))
-            db.refresh(updated_task)
-            return updated_task
+            try:
+                saas.send_notification(new_task.judul, current_user.pushover_user_key)
+            except Exception as notif_error:
+                print(f"Gagal mengirim notifikasi Pushover: {notif_error}")
+            else:
+                updated_task = crud.update_task(db, new_task.id, TaskUpdate(notifikasi=True))
+                return updated_task
 
-        # kalau tidak ada update
-        db.refresh(new_task)
         return new_task
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Gagal menambahkan task: {str(e)}")
-
+        # Log error di server
+        print(f"Error create_task: {e}")
+        return JSONResponse(
+            status_code=500,
+            content={"detail": f"Gagal menambahkan task: {str(e)}"}
+        )
+    
 
 @app.put("/tasks/{task_id}", response_model=Task)
 def update_task(task_id: int, task_update: TaskUpdate, db: Session = Depends(get_db), current_user: UserSchema = Depends(get_current_user)):

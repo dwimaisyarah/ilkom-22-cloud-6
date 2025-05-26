@@ -36,7 +36,7 @@ class TokenResponse(BaseModel):
 class TaskBase(BaseModel):
     judul: str
     deskripsi: Optional[str] = None
-    deadline: Optional[date] = None
+    deadline: Optional[datetime] = None
     done: Optional[bool] = False
     pushover: Optional[bool] = False
     notifikasi: Optional[bool] = False
@@ -48,15 +48,25 @@ class TaskCreate(TaskBase):
 class TaskUpdate(BaseModel):
     judul: Optional[str] = None
     deskripsi: Optional[str] = None
-    deadline: Optional[date] = None
+    deadline: Optional[datetime] = None
     done: Optional[bool] = None
     pushover: Optional[bool] = None
     notifikasi: Optional[bool] = None
 
-class Task(TaskBase):
+
+class Task(BaseModel):
     id: int
+    judul: str
+    deskripsi: Optional[str] = None
+    deadline: Optional[datetime] = None
+    done: bool = False
+    pushover: bool = False
+    notifikasi: bool = False
     user_id: int
 
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True, json_encoders={datetime: lambda v: v.isoformat()})
+
+
+
 
 

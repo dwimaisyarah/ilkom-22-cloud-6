@@ -1,0 +1,100 @@
+/* Umum */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(to right, #B2F7EF, #FFFFCC);
+  min-height: 100vh;
+  padding: 60px 20px 80px;/* Tambahan agar isi turun dari navbar fixed */
+}
+
+/* Container utama */
+form#edit-task-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #f3fdf4;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.1);
+}
+
+/* Heading */
+h1 {
+  text-align: center;
+  font-size: 22px;
+  color: #2e7d32;
+  margin-bottom: 30px;
+  
+}
+
+/* Label */
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Input & Textarea */
+input[type="text"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #a7e6b9;
+  color: #003f1f;
+  font-size: 14px;
+}
+
+input[type="text"]::placeholder,
+input[type="date"]::placeholder,
+textarea::placeholder {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+/* Date input khusus */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.2);
+}
+
+form label[for="done"] {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  font-weight: 500;
+  color: #222;
+}
+
+/* Tombol Simpan */
+button#submit-btn {
+  margin-top: 25px;
+  padding: 12px 20px;
+  width: 100%;
+  background-color: #00a867;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s ease;
+}
+
+button#submit-btn:hover {
+  background-color: #008f56;
+}

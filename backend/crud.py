@@ -16,15 +16,19 @@ def get_tasks_by_user(db: Session, user_id: int):
 
 # crud.py
 def add_task(db: Session, task_data: TaskCreate, user_id: int):
-    data = task_data.dict()
-    data['user_id'] = user_id
-    data['notifikasi'] = False
-    new_task = Task(**data)
+    new_task = Task(
+        judul=task_data.judul,
+        deskripsi=task_data.deskripsi,
+        deadline=task_data.deadline,
+        done=task_data.done or False,
+        pushover=task_data.pushover,
+        notifikasi=False,  # default false di awal
+        user_id=user_id,
+    )
     db.add(new_task)
     db.commit()
     db.refresh(new_task)
     return new_task
-
 
 def update_task(db: Session, task_id: int, task_data: TaskUpdate):
     task = db.query(Task).filter(Task.id == task_id).first()

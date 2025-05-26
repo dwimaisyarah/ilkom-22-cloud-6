@@ -1,0 +1,207 @@
+/* Umum */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(to right, #B2F7EF, #FFFFCC);
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  padding: 20px 50px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #007f4e;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.nav-links a.active {
+  color: #00aa5b;
+  font-weight: 600;
+  border-bottom: 2px solid #00aa5b;
+}
+
+/* Container */
+.task-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f3fdf4;
+  border: 2px solid #b1e7c1;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.1);
+}
+
+.task-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Controls */
+.task-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+#search-task {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #d4f5db;
+  font-size: 16px;
+  outline: none;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-buttons button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: #b2e8c4;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-buttons .active {
+  background-color: #73d694;
+  color: white;
+}
+
+/* Task List */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Task Card */
+.task-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  border-left: 6px solid #00b379;
+}
+
+.task-card.highlight {
+  background-color: #c4f0c5;
+}
+
+.task-card h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.task-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+.task-card .deadline {
+  margin-top: 5px;
+  color: #f14e4e;
+  font-size: 13px;
+}
+
+/* Task Actions */
+.task-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.task-actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.task-actions .selesai-btn {
+  background-color: #00cc88;
+  color: white;
+}
+
+.task-actions .edit-btn {
+  background-color: #d5f5de;
+  color: #333;
+}
+
+.task-actions .hapus-btn {
+  background-color: #dcdcdc;
+  color: #666;
+}
+
+/* Pop-up Alert Styles */
+.popup-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #f87171; /* Merah muda terang */
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  font-weight: 500;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.popup-alert.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.popup-alert.success {
+  background-color: #34D399; /* Warna hijau untuk sukses */
+}
+
+.popup-alert.warning {
+  background-color: #FBBF24; /* Warna kuning untuk warning */
+}
+
+.popup-alert.error {
+  background-color: #EF4444; /* Warna merah untuk error */
+}
