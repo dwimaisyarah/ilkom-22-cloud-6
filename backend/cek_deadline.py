@@ -44,7 +44,7 @@ def cek_deadline():
                 if task.pushover:
                     pesan = f"Pengingat: Tugas '{task.judul}' akan deadline pada {deadline_str}"
                     print(f"Mengirim notifikasi: {pesan}")
-                    saas.send_notification(pesan, task.pushover)  # Kirim pesan + user_key
+                    saas.send_notification(pesan, task.pushover)
                 else:
                     print(f"Tugas '{task.judul}' deadline {deadline_str}, tapi notifikasi pushover dimatikan.")
 
