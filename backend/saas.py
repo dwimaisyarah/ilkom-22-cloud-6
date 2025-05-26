@@ -6,7 +6,7 @@ def send_notification(judul: str, user_key: str):
     payload = {
         "token": token,
         "user": user_key,
-        "message": judul
+        "message": judul,
     }
 
     headers = {
