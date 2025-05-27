@@ -22,13 +22,15 @@ def cek_deadline():
             Task.done == False,
             Task.deadline != None,
             Task.deadline <= now + satu_hari,
-            Task.deadline >= now
+            Task.deadline >= now,
+            Task.notifikasi == False
         ).all()
 
         overdue_tasks = session.query(Task).filter(
             Task.done == False,
             Task.deadline != None,
-            Task.deadline < now
+            Task.deadline < now,
+            Task.notifikasi == False
         ).all()
 
         semua_task = upcoming_tasks + overdue_tasks
@@ -44,6 +46,8 @@ def cek_deadline():
                     deskripsi = task.deskripsi or "Tidak ada deskripsi"
                     print(f"Mengirim notifikasi: {pesan}")
                     saas.send_notification(task.judul, deskripsi, task.user.pushover_user_key)
+                    task.notifikasi = True
+                    session.commit()
                 else:
                     print(f"Tugas '{task.judul}' deadline {deadline_str}, tapi notifikasi pushover dimatikan atau user_key tidak tersedia.")
 
