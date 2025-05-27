@@ -37,6 +37,10 @@ app.mount("/js", StaticFiles(directory="frontend/js"), name="js")
 def serve_index():
     return FileResponse(os.path.join("frontend", "index.html"))
 
+@app.get("/test")
+async def root():
+    return {"message": "API is running"}
+
 # ==== Middleware CORS ====
 app.add_middleware(
     CORSMiddleware,
@@ -122,7 +126,7 @@ async def create_task(
         if new_task.pushover and current_user.pushover_user_key:
             print("Kirim notif ke pushover...")
             try:
-                saas.send_notification(new_task.judul, current_user.pushover_user_key)
+                saas.send_notification(new_task.judul, new_task.deskripsi, current_user.pushover_user_key)
             except Exception as notif_error:
                 print(f"Gagal mengirim notifikasi Pushover: {notif_error}")
             else:
