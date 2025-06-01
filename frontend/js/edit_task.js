@@ -1,25 +1,28 @@
+// Menunggu sampai seluruh isi dokumen HTML dimuat
 document.addEventListener("DOMContentLoaded", async () => {
-  const token = localStorage.getItem("access_token");
-  if (!token) {
+  const token = localStorage.getItem("access_token"); // Mengambil token dari localStorage (digunakan untuk autentikasi)
+  if (!token) {                                       // Jika tidak ada token, artinya belum login → redirect ke halaman login
     alert("Silakan login terlebih dahulu.");
     window.location.href = "login.html";
     return;
   }
-
+  // Mengambil ID tugas dari parameter URL (contoh: edit-task.html?id=123)
   const urlParams = new URLSearchParams(window.location.search);
   const taskId = urlParams.get("id");
-  if (!taskId) {
+  // Jika ID tugas tidak ditemukan di URL, redirect ke halaman utama
+  if (!taskId) {                                    
     alert("ID tugas tidak ditemukan.");
     window.location.href = "index.html";
     return;
   }
-
+  // Mendapatkan elemen-elemen form dari HTML
   const form = document.getElementById("edit-task-form");
   const judulInput = document.getElementById("judul");
   const deskripsiInput = document.getElementById("deskripsi");
   const deadlineInput = document.getElementById("deadline");
   const doneInput = document.getElementById("done");
 
+  // Mengambil data tugas dari backend berdasarkan ID
   try {
     const response = await fetch(`http://localhost:5500/ambil-tugas/${taskId}`, {
       headers: { Authorization: `Bearer ${token}` }
@@ -39,6 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  // Menambahkan event listener saat form disubmit
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     
@@ -67,9 +71,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         throw new Error(msg);
       }
 
+      // Tampilkan pesan sukses dan redirect ke halaman daftar tugas
       alert("Tugas berhasil diperbarui.");
       window.location.href = "task.html";
-
+      
+    // Tangani dan tampilkan error saat update gagal
     } catch (error) {
       alert(error.message);
       console.error(error);
