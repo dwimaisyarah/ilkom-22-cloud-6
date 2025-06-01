@@ -1,3 +1,4 @@
+#Import pustaka FastAPI dan komponen pendukung lainnya
 from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,6 +10,7 @@ from jose import jwt, JWTError
 from datetime import datetime, timedelta
 import os
 
+# Import modul backend: operasi CRUD, konfigurasi, skema data, database
 from backend import crud, saas, config
 from backend.database import get_db
 from backend.schemas import (
@@ -22,8 +24,10 @@ SECRET_KEY = config.SECRET_KEY
 ALGORITHM = config.ALGORITHM
 ACCESS_TOKEN_EXPIRE_MINUTES = config.ACCESS_TOKEN_EXPIRE_MINUTES
 
+# Skema otentikasi OAuth2 menggunakan password bearer
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
+# Inisialisasi aplikasi FastAPI
 app = FastAPI()
 
 # Mount static files (akses via /static)
