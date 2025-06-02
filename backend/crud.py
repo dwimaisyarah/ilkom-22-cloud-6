@@ -6,18 +6,22 @@ from passlib.context import CryptContext
 import requests
 
 # === Password Hashing ===
+# Inisialisasi konteks hashing password dengan bcrypt
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+# Fungsi untuk mengubah password plaintext menjadi hash
 def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
 
+# Fungsi untuk memverifikasi password plaintext dengan hash yang disimpan
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
 # === Pushover Notification ===
+# Fungsi untuk mengirim notifikasi melalui Pushover
 def send_pushover_notification(user_key: str, title: str, message: str):
     payload = {
-        "token": "YOUR_PUSHOVER_APP_TOKEN",   # Ganti dengan app token milikmu
+        "token": "YOUR_PUSHOVER_APP_TOKEN",  # Ganti dengan token aplikasi Pushover milik Anda
         "user": user_key,
         "title": title,
         "message": message
@@ -30,15 +34,19 @@ def send_pushover_notification(user_key: str, title: str, message: str):
 
 # ===== TASK CRUD =====
 
+# Ambil semua task dari database
 def get_all_tasks(db: Session):
     return db.query(Task).all()
 
+# Ambil task berdasarkan ID
 def get_task_by_id(db: Session, task_id: int):
     return db.query(Task).filter(Task.id == task_id).first()
 
+# Ambil semua task milik user tertentu
 def get_tasks_by_user(db: Session, user_id: int):
     return db.query(Task).filter(Task.user_id == user_id).all()
 
+# Tambahkan task baru ke database
 def add_task(db: Session, task_data: TaskCreate, user_id: int):
     new_task = Task(
         judul=task_data.judul,
@@ -53,7 +61,7 @@ def add_task(db: Session, task_data: TaskCreate, user_id: int):
     db.commit()
     db.refresh(new_task)
 
-    # Kirim notifikasi Pushover jika diaktifkan
+    # Kirim notifikasi Pushover jika user mengaktifkan opsi pushover
     if task_data.pushover:
         user = get_user_by_id(db, user_id)
         if user and user.pushover_user_key:
@@ -65,6 +73,7 @@ def add_task(db: Session, task_data: TaskCreate, user_id: int):
 
     return new_task
 
+# Perbarui data task berdasarkan task_id
 def update_task(db: Session, task_id: int, task_data: TaskUpdate):
     task = db.query(Task).filter(Task.id == task_id).first()
     if task:
@@ -84,6 +93,7 @@ def update_task(db: Session, task_id: int, task_data: TaskUpdate):
         db.refresh(task)
     return task
 
+# Hapus task berdasarkan ID
 def delete_task(db: Session, task_id: int):
     task = db.query(Task).filter(Task.id == task_id).first()
     if task:
@@ -93,15 +103,19 @@ def delete_task(db: Session, task_id: int):
 
 # ===== USER CRUD =====
 
+# Ambil semua user dari database
 def get_all_users(db: Session):
     return db.query(User).all()
 
+# Ambil user berdasarkan ID
 def get_user_by_id(db: Session, user_id: int) -> Optional[User]:
     return db.query(User).filter(User.id == user_id).first()
 
+# Ambil user berdasarkan username
 def get_user_by_username(db: Session, username: str) -> Optional[User]:
     return db.query(User).filter(User.username == username).first()
 
+# Buat user baru dengan menyimpan hashed password
 def create_user(db: Session, user_data: UserCreate) -> User:
     hashed_pw = get_password_hash(user_data.password)
     new_user = User(
@@ -114,6 +128,7 @@ def create_user(db: Session, user_data: UserCreate) -> User:
     db.refresh(new_user)
     return new_user
 
+# Autentikasi user berdasarkan username dan password
 def authenticate_user(db: Session, username: str, password: str) -> Optional[User]:
     user = get_user_by_username(db, username)
     if user and verify_password(password, user.hashed_password):
