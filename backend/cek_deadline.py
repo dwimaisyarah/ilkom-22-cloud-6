@@ -19,18 +19,18 @@ def cek_deadline():
         print(f"[{now.strftime('%Y-%m-%d %H:%M')}] Mengecek tugas yang deadline...")
 
         upcoming_tasks = session.query(Task).filter(
-            Task.done == None,
+            Task.done == False,
             Task.deadline != None,
             Task.deadline <= now + satu_hari,
             Task.deadline >= now,
-            Task.notifikasi == None
+            Task.notifikasi == False
         ).all()
 
         overdue_tasks = session.query(Task).filter(
-            Task.done == None,
+            Task.done == False,
             Task.deadline != None,
             Task.deadline < now,
-            Task.notifikasi == None
+            Task.notifikasi == False
         ).all()
 
         semua_task = upcoming_tasks + overdue_tasks
