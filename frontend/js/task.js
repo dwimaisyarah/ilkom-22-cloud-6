@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // Verifikasi token saat halaman dimuat
   try {
-    const response = await fetch("http://100.24.60.248:5500/me", {
+    const response = await fetch("http://localhost:5500//me", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}` // Sertakan token di header
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     try {
       // Kirim permintaan POST ke endpoint add-task dengan data task
-      const response = await fetch("http://100.24.60.248:5500/add-task", {
+      const response = await fetch("http://localhost:5500//add-task", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

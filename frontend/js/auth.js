@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://100.24.60.248:8000";
+const API_BASE_URL = "http://localhost:5500";
 
 // === REGISTER USER ===
 async function registerUser(username, password, pushoverKey = null) {

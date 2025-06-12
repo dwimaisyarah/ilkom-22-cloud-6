@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Mengambil data tugas dari backend berdasarkan ID
   try {
-    const response = await fetch(`http://100.24.60.248:8000/ambil-tugas/${taskId}`, {
+    const response = await fetch(`http://localhost:5500/ambil-tugas/${taskId}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     if (!response.ok) throw new Error("Gagal mengambil data tugas");
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     try {
-      const res = await fetch(`http://100.24.60.248:8000/tasks/${taskId}`, {
+      const res = await fetch(`http://localhost:5500//tasks/${taskId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
