@@ -59,8 +59,8 @@ class Task(BaseModel):
     judul: str
     deskripsi: Optional[str] = None
     deadline: Optional[datetime] = None
-    done: bool = False
-    pushover: bool = False
+    done: bool = None
+    pushover: bool = None
     notifikasi: bool = False
     user_id: int
 
