@@ -50,8 +50,8 @@ class TaskUpdate(BaseModel):
     deskripsi: Optional[str] = None
     deadline: Optional[datetime] = None
     done: Optional[bool] = None
-    pushover: Optional[bool] = None
-    notifikasi: Optional[bool] = None
+    pushover: Optional[bool] = False
+    notifikasi: Optional[bool] = False
 
 
 class Task(BaseModel):
