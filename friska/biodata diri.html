@@ -2,94 +2,79 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengenalan Cloud Computing</title>
+    <title>Fitur Layanan Aplikasi</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #eef2f3;
-            margin: 0;
-            padding: 0;
+            background-color: #f2f6f9;
+            padding: 30px;
         }
 
-        header {
-            background-color: #005aa7;
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        caption {
+            caption-side: top;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #0077cc;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0077cc;
             color: white;
-            padding: 20px;
-            text-align: center;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            color: #005aa7;
-            margin-top: 20px;
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            background-color: #f4f4f4;
-            margin-top: 40px;
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Apa Itu Cloud Computing?</h1>
-        <p>Pemanfaatan Teknologi Komputasi Awan</p>
-    </header>
-
-    <div class="container">
-        <section>
-            <h2>Definisi</h2>
-            <p>
-                Cloud computing (komputasi awan) adalah teknologi yang memungkinkan pengguna mengakses sumber daya komputasi (seperti server, penyimpanan, database, dan perangkat lunak) melalui internet.
-            </p>
-        </section>
-
-        <section>
-            <h2>Model Layanan</h2>
-            <ul>
-                <li><strong>IaaS (Infrastructure as a Service)</strong> – Contoh: AWS EC2, Google Compute Engine</li>
-                <li><strong>PaaS (Platform as a Service)</strong> – Contoh: Google App Engine, Heroku</li>
-                <li><strong>SaaS (Software as a Service)</strong> – Contoh: Google Docs, Dropbox</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Manfaat Cloud Computing</h2>
-            <ul>
-                <li>Efisiensi biaya</li>
-                <li>Skalabilitas</li>
-                <li>Akses data dari mana saja</li>
-                <li>Backup dan pemulihan data</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Contoh Penggunaan</h2>
-            <p>
-                Mahasiswa menggunakan Google Drive untuk menyimpan tugas, perusahaan mengelola server dengan AWS, dan tim pengembang membuat aplikasi dengan Firebase.
-            </p>
-        </section>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 Friska Amelia - Tugas Cloud Computing</p>
-    </footer>
+    <table>
+        <caption>Fitur Layanan Aplikasi</caption>
+        <thead>
+            <tr>
+                <th>Fitur</th>
+                <th>Deskripsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Login Pengguna</td>
+                <td>Pengguna dapat masuk menggunakan email dan password.</td>
+            </tr>
+            <tr>
+                <td>Upload Dokumen</td>
+                <td>Pengguna dapat mengunggah file seperti PDF atau gambar.</td>
+            </tr>
+            <tr>
+                <td>Notifikasi Otomatis</td>
+                <td>Sistem mengirimkan email pemberitahuan kepada pengguna.</td>
+            </tr>
+            <tr>
+                <td>Riwayat Aktivitas</td>
+                <td>Menampilkan catatan aktivitas pengguna dalam aplikasi.</td>
+            </tr>
+            <tr>
+                <td>Live Chat</td>
+                <td>Pengguna dapat bertanya langsung melalui fitur chat.</td>
+            </tr>
+        </tbody>
+    </table>
 
 </body>
 </html>
