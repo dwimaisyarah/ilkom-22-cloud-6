@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penghitung Usia</title>
+</head>
+<body>
+    <h1>Penghitung Usia</h1>
+    <input type="date" id="tanggalLahir">
+    <button onclick="hitungUsia()">Hitung Usia</button>
+    <div id="usia"></div>
+
+    <script>
+        function hitungUsia() {
+            const tanggalLahir = new Date(document.getElementById('tanggalLahir').value);
+            const sekarang = new Date();
+            let usia = sekarang.getFullYear() - tanggalLahir.getFullYear();
+            const m = sekarang.getMonth() - tanggalLahir.getMonth();
+
+            if (m < 0 || (m === 0 && sekarang.getDate() < tanggalLahir.getDate())) {
+                usia--;
+            }
+
+            document.getElementById('usia').innerText = "Usia Anda: " + usia + " tahun";
+        }
+    </script>
+</body>
+</html>
