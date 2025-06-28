@@ -13,7 +13,7 @@ export const userLogin = async (req, res, next) => {
     const isPasswordCorrect = await user.isPasswordCorrect(password);
 
     if (!isPasswordCorrect) throw new ApiError(401, 'Password is wrong', '');
-
+    
     const token = user.generateAccessToken(user);
 
     res.cookie('token', token, { httpOnly: true }).redirect('/user/dashboard');

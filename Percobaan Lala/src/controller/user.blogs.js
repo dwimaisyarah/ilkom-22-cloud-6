@@ -33,11 +33,13 @@ export const getAllUserBlogs = async (req, res, next) => {
 
 export const createBlog = async (req, res, next) => {
     let { title, description, content } = req.body;
+
     // console.log(req.user);
     title = title.trim();
     description = description.trim();
     content = content.trim();
     const coverImage = req.file;
+
     // console.log('coverimage: \n', coverImage);
     const coverimageBuffer = Buffer.from(readFileSync(coverImage.path));
     const blog = await Blog.create(
@@ -51,6 +53,7 @@ export const createBlog = async (req, res, next) => {
             authorName: req.user.name
         }
     );
+    
     // console.log('created blog', blog);
     const updatedUser = await User.findByIdAndUpdate(
         req.user._id,
