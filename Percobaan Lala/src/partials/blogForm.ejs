@@ -9,3 +9,17 @@
      required
     <% } %>
   />
+</div>
+<div class="mb-3">
+  <label for="title" class="form-label">Title</label>
+  <input
+    type="text"
+    class="form-control"
+    id="title"
+    placeholder="Blog title"
+    name="title"
+    value="<% if ( edit ) { %>
+      <%= (blog.title).trim() %>
+     <% } %>"
+    required
+  />
