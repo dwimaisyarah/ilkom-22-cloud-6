@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>Add commentMore actions
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -60,3 +60,42 @@
           </div>
         </div>
       </div>
+
+      <% }); %> <% } %>
+    </div>
+    <script>
+      const viewBtn = document.querySelectorAll(".View");
+      const editBtn = document.querySelectorAll(".Edit");
+      const deleteBtn = document.querySelectorAll(".Delete");
+
+      viewBtn.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const blogId = e.target.parentNode.dataset.blog;
+          location.href = `/user/blogs/viewBlog/${blogId}`;
+        });
+      });
+
+      editBtn.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const blogId = e.target.parentNode.dataset.blog;
+          location.href = `/user/blogs/editBlog/${blogId}`;
+        });
+      });
+
+      deleteBtn.forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+          const blogId = e.target.parentNode.dataset.blog;
+          const response = await fetch(`/user/blogs/deleteBlog/${blogId}`, {
+            method: "delete",
+          });
+          if (!response.ok) {
+            alert(`${response.statusText}`);
+            return;
+          }
+          const blog = document.querySelector(`#blog-${blogId}`);
+          blog.remove();
+        });
+      });
+    </script>
+  </body>
+</html>
