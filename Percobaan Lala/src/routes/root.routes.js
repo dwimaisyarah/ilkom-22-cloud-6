@@ -14,6 +14,7 @@ rootRouter.route('/').get(asyncHandler(rootAuthenticate), (req, res) => {
 });
 
 rootRouter.route('/login').post(asyncHandler(userLogin));
+
 rootRouter.route('/signup').post(asyncHandler(userSignUp));
 
 rootRouter.route('/blogs').get(asyncHandler(authenticate), asyncHandler(getAllBlogs));

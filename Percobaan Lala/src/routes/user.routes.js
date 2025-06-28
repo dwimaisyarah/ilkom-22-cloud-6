@@ -41,4 +41,4 @@ userRouter.route('/blogs/deleteBlog/:id')
     .delete(
         asyncHandler(authenticate),
         asyncHandler(deleteBlog)
-    )
+    );
