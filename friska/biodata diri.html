@@ -2,109 +2,74 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutorial HTML Dasar</title>
+    <title>Form Kontak</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f3f7fa;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #0a74da;
-            color: white;
+            background-color: #eef2f3;
             padding: 20px;
-            text-align: center;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 30px auto;
-            background-color: white;
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            background-color: #ffffff;
             padding: 25px;
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        pre {
-            background-color: #eee;
-            padding: 10px;
-            overflow-x: auto;
-        }
-
         h2 {
-            color: #0a74da;
-            margin-top: 20px;
+            text-align: center;
+            color: #0077cc;
         }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #ddd;
-            margin-top: 40px;
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005fa3;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Tutorial HTML Dasar</h1>
-        <p>Belajar Tag-Tag HTML untuk Pemula</p>
-    </header>
+    <div class="form-container">
+        <h2>Hubungi Kami</h2>
+        <form>
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required>
 
-    <div class="container">
-        <section>
-            <h2>Apa itu HTML?</h2>
-            <p>HTML (HyperText Markup Language) adalah bahasa standar untuk membuat halaman web.</p>
-        </section>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-        <section>
-            <h2>Contoh Struktur HTML</h2>
-            <pre>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Judul Halaman&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Halo Dunia!&lt;/h1&gt;
-    &lt;p&gt;Ini paragraf pertama.&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-            </pre>
-        </section>
+            <label for="pesan">Pesan:</label>
+            <textarea id="pesan" name="pesan" rows="5" required></textarea>
 
-        <section>
-            <h2>Tag-Tag Dasar</h2>
-            <ul>
-                <li><strong>&lt;h1&gt; - &lt;h6&gt;</strong> : Judul (Heading)</li>
-                <li><strong>&lt;p&gt;</strong> : Paragraf</li>
-                <li><strong>&lt;a&gt;</strong> : Tautan (Link)</li>
-                <li><strong>&lt;img&gt;</strong> : Gambar</li>
-                <li><strong>&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</strong> : Daftar</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Contoh Tautan dan Gambar</h2>
-            <pre>
-&lt;a href="https://www.google.com"&gt;Kunjungi Google&lt;/a&gt;
-
-&lt;img src="gambar.jpg" alt="Contoh Gambar" width="200"&gt;
-            </pre>
-        </section>
-
-        <section>
-            <h2>Penutup</h2>
-            <p>HTML adalah dasar dari setiap halaman web. Dengan memahami struktur dan tag-nya, kamu sudah memulai langkah awal menjadi web developer.</p>
-        </section>
+            <button type="submit">Kirim</button>
+        </form>
     </div>
-
-    <footer>
-        <p>&copy; 2025 Friska Amelia - Tutorial HTML Dasar</p>
-    </footer>
 
 </body>
 </html>
