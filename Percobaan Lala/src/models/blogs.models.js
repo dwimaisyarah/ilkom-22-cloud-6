@@ -60,5 +60,4 @@ const blogSchema = new Schema(
     }
 );
 
-
 export const Blog = model('Blog', blogSchema);
