@@ -1,26 +1,57 @@
-<!-- ✅ Formulir Pengajuan Judul Skripsi -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Pengajuan Judul Skripsi</title>
+  <title>Testimoni Pengguna</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    blockquote { background: #fff; padding: 15px; border-left: 5px solid #4CAF50; margin-bottom: 10px; }
+    em { color: #555; }
+    .rating { color: gold; }
+    form { background: #fff; padding: 15px; margin-top: 20px; }
+  </style>
 </head>
 <body>
-  <h2>Formulir Pengajuan Judul Skripsi</h2>
+  <h2>Apa Kata Mereka?</h2>
+  <blockquote>
+    <span class="rating">★★★★★</span><br>
+    "Layanannya cepat dan ramah!" - <em>Sinta</em>
+  </blockquote>
+  <blockquote>
+    <span class="rating">★★★★☆</span><br>
+    "Produk sangat bagus dan berkualitas." - <em>Rico</em>
+  </blockquote>
+  <blockquote>
+    <span class="rating">★★★★★</span><br>
+    "Sangat puas dengan pelayanannya." - <em>Andi</em>
+  </blockquote>
+  <blockquote>
+    <span class="rating">★★★★☆</span><br>
+    "Pengiriman cepat dan produk sesuai harapan." - <em>Maria</em>
+  </blockquote>
+  <blockquote>
+    <span class="rating">★★★☆☆</span><br>
+    "Lumayan, tapi kemasan bisa lebih baik." - <em>Bayu</em>
+  </blockquote>
+
+  <h3>Kirim Testimoni Anda:</h3>
   <form>
-    <label>Nama Mahasiswa:</label><br>
+    <label>Nama:</label><br>
     <input type="text" name="nama"><br><br>
 
-    <label>NIM:</label><br>
-    <input type="text" name="nim"><br><br>
+    <label>Rating:</label><br>
+    <select name="rating">
+      <option value="5">★★★★★</option>
+      <option value="4">★★★★☆</option>
+      <option value="3">★★★☆☆</option>
+      <option value="2">★★☆☆☆</option>
+      <option value="1">★☆☆☆☆</option>
+    </select><br><br>
 
-    <label>Judul Skripsi:</label><br>
-    <textarea name="judul"></textarea><br><br>
+    <label>Pesan:</label><br>
+    <textarea name="pesan" rows="4" cols="40"></textarea><br><br>
 
-    <label>Dosen Pembimbing:</label><br>
-    <input type="text" name="dosen"><br><br>
-
-    <button type="submit">Ajukan</button>
+    <button type="submit">Kirim Testimoni</button>
   </form>
 </body>
 </html>
