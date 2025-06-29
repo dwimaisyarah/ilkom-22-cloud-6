@@ -1,8 +1,139 @@
-<section>
-    <h2>Daftar Tugas</h2>
-    <table>
-        <tr><th>No</th><th>Nama Tugas</th><th>Status</th></tr>
-        <tr><td>1</td><td>Proyek HTML</td><td>Selesai</td></tr>
-        <tr><td>2</td><td>Form Kontak</td><td>Dalam Proses</td></tr>
-    </table>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Portofolio Dev</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+        header {
+            background-color: #1e1e1e;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        section {
+            padding: 30px;
+        }
+        .projects, .testimonials {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 16px;
+        }
+        form input[type="submit"] {
+            background-color: #1e1e1e;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #1e1e1e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Portofolio Friska Dev</h1>
+    <p>Frontend & Backend Developer</p>
+</header>
+
+<nav>
+    <a href="#tentang">Tentang</a>
+    <a href="#proyek">Proyek</a>
+    <a href="#testimoni">Testimoni</a>
+    <a href="#kontak">Kontak</a>
+</nav>
+
+<section id="tentang">
+    <h2>Tentang Saya</h2>
+    <p>Saya adalah developer yang antusias membangun aplikasi web dan mobile. Saya suka dengan UI/UX modern, serta menyukai tantangan backend.</p>
 </section>
+
+<section id="proyek">
+    <h2>Proyek</h2>
+    <div class="projects">
+        <div class="card">
+            <h3>Aplikasi Toko</h3>
+            <p>Sistem kasir berbasis web dengan laporan penjualan.</p>
+        </div>
+        <div class="card">
+            <h3>Website Sekolah</h3>
+            <p>Halaman profil sekolah, berita, dan pendaftaran online.</p>
+        </div>
+        <div class="card">
+            <h3>Blog Teknologi</h3>
+            <p>Blog pribadi dengan CMS buatan sendiri.</p>
+        </div>
+    </div>
+</section>
+
+<section id="testimoni">
+    <h2>Testimoni</h2>
+    <div class="testimonials">
+        <div class="card">
+            <p>"Friska sangat profesional dan cepat tanggap!"</p>
+            <strong>- Klien A</strong>
+        </div>
+        <div class="card">
+            <p>"Proyek selesai tepat waktu dan melebihi ekspektasi."</p>
+            <strong>- Klien B</strong>
+        </div>
+    </div>
+</section>
+
+<section id="kontak">
+    <h2>Kontak</h2>
+    <form>
+        <label>Nama:</label>
+        <input type="text" name="nama" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Pesan:</label>
+        <textarea name="pesan" rows="4" required></textarea>
+
+        <input type="submit" value="Kirim Pesan">
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2025 Friska Developer. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
