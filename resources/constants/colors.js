@@ -5,4 +5,12 @@ const COLORS = [
     // Tambahkan hingga ratusan atau ribuan entri jika perlu
 ];
 
+// Kode tambahan di bawah ini
+// (Silakan tambahkan kode yang Anda maksud di sini)
+
+COLORS.push(
+    "cyan", "magenta", "lime", "maroon", "navy", "olive", "teal", "aqua", "fuchsia", "silver",
+    "gold", "beige", "coral", "indigo", "ivory", "khaki", "lavender", "mint", "plum", "salmon"
+);
+
 module.exports = COLORS;
