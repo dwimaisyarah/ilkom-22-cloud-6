@@ -2,56 +2,86 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Testimoni Pengguna</title>
+  <title>To-Do List Lengkap</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
-    blockquote { background: #fff; padding: 15px; border-left: 5px solid #4CAF50; margin-bottom: 10px; }
-    em { color: #555; }
-    .rating { color: gold; }
-    form { background: #fff; padding: 15px; margin-top: 20px; }
+    body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+    h1 { text-align: center; }
+    #todo-form { margin-bottom: 20px; display: flex; gap: 10px; justify-content: center; }
+    input[type="text"] { padding: 10px; width: 300px; }
+    button { padding: 10px; }
+    ul { list-style: none; padding: 0; }
+    li { background: #fff; margin-bottom: 10px; padding: 10px; border-left: 5px solid #2196F3; display: flex; justify-content: space-between; align-items: center; }
+    .checked { text-decoration: line-through; color: gray; }
+    .actions button { margin-left: 5px; }
   </style>
 </head>
 <body>
-  <h2>Apa Kata Mereka?</h2>
-  <blockquote>
-    <span class="rating">★★★★★</span><br>
-    "Layanannya cepat dan ramah!" - <em>Sinta</em>
-  </blockquote>
-  <blockquote>
-    <span class="rating">★★★★☆</span><br>
-    "Produk sangat bagus dan berkualitas." - <em>Rico</em>
-  </blockquote>
-  <blockquote>
-    <span class="rating">★★★★★</span><br>
-    "Sangat puas dengan pelayanannya." - <em>Andi</em>
-  </blockquote>
-  <blockquote>
-    <span class="rating">★★★★☆</span><br>
-    "Pengiriman cepat dan produk sesuai harapan." - <em>Maria</em>
-  </blockquote>
-  <blockquote>
-    <span class="rating">★★★☆☆</span><br>
-    "Lumayan, tapi kemasan bisa lebih baik." - <em>Bayu</em>
-  </blockquote>
+  <h1>To-Do List</h1>
+  <div id="todo-form">
+    <input type="text" id="taskInput" placeholder="Tambahkan tugas baru...">
+    <button onclick="addTask()">Tambah</button>
+    <button onclick="clearTasks()">Reset</button>
+  </div>
+  <ul id="taskList"></ul>
 
-  <h3>Kirim Testimoni Anda:</h3>
-  <form>
-    <label>Nama:</label><br>
-    <input type="text" name="nama"><br><br>
+  <script>
+    let tasks = JSON.parse(localStorage.getItem("todos")) || [];
 
-    <label>Rating:</label><br>
-    <select name="rating">
-      <option value="5">★★★★★</option>
-      <option value="4">★★★★☆</option>
-      <option value="3">★★★☆☆</option>
-      <option value="2">★★☆☆☆</option>
-      <option value="1">★☆☆☆☆</option>
-    </select><br><br>
+    function renderTasks() {
+      const list = document.getElementById("taskList");
+      list.innerHTML = "";
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.className = task.done ? "checked" : "";
 
-    <label>Pesan:</label><br>
-    <textarea name="pesan" rows="4" cols="40"></textarea><br><br>
+        const span = document.createElement("span");
+        span.textContent = task.text;
+        span.onclick = () => toggleDone(index);
 
-    <button type="submit">Kirim Testimoni</button>
-  </form>
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Hapus";
+        delBtn.onclick = () => deleteTask(index);
+
+        actions.appendChild(delBtn);
+        li.appendChild(span);
+        li.appendChild(actions);
+        list.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const text = input.value.trim();
+      if (text === "") return;
+      tasks.push({ text, done: false });
+      input.value = "";
+      saveTasks();
+    }
+
+    function toggleDone(index) {
+      tasks[index].done = !tasks[index].done;
+      saveTasks();
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      saveTasks();
+    }
+
+    function clearTasks() {
+      tasks = [];
+      saveTasks();
+    }
+
+    function saveTasks() {
+      localStorage.setItem("todos", JSON.stringify(tasks));
+      renderTasks();
+    }
+
+    renderTasks();
+  </script>
 </body>
 </html>
