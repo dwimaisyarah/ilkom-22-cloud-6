@@ -2,97 +2,95 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Kalkulator</title>
+  <title>Progress Tracker</title>
   <style>
     body {
-      background: #f0f0f0;
       font-family: Arial, sans-serif;
-      display: flex;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
+      background: #f0f0f0;
+      padding: 30px;
+      text-align: center;
     }
-    .calculator {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 260px;
+    h1 {
+      margin-bottom: 20px;
     }
-    #display {
-      width: 100%;
-      height: 50px;
-      font-size: 24px;
-      margin-bottom: 10px;
-      text-align: right;
+    input[type="number"] {
       padding: 10px;
-      box-sizing: border-box;
-    }
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+      width: 80px;
+      font-size: 16px;
+      margin-right: 10px;
     }
     button {
-      padding: 15px;
-      font-size: 18px;
-      border: none;
-      background: #e0e0e0;
-      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
       cursor: pointer;
     }
-    button.operator {
+    .bar-container {
+      width: 100%;
+      max-width: 600px;
+      height: 30px;
+      background: #ddd;
+      margin: 30px auto;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .bar {
+      height: 100%;
       background: #4CAF50;
+      width: 0;
+      text-align: right;
+      line-height: 30px;
       color: white;
+      font-weight: bold;
+      padding-right: 10px;
+      transition: width 0.4s ease;
     }
-    button.equal {
-      background: #2196F3;
-      color: white;
-      grid-column: span 2;
+    .info {
+      margin-top: 10px;
+      color: #333;
+      font-size: 14px;
     }
-    button.clear {
-      background: #f44336;
-      color: white;
-      grid-column: span 2;
+    footer {
+      margin-top: 50px;
+      font-size: 13px;
+      color: #666;
     }
+    .bar.red { background: #f44336; }
+    .bar.yellow { background: #FF9800; }
+    .bar.green { background: #4CAF50; }
   </style>
 </head>
 <body>
-  <div class="calculator">
-    <input type="text" id="display" disabled>
-    <div class="buttons">
-      <button onclick="append('7')">7</button>
-      <button onclick="append('8')">8</button>
-      <button onclick="append('9')">9</button>
-      <button class="operator" onclick="append('/')">/</button>
-      <button onclick="append('4')">4</button>
-      <button onclick="append('5')">5</button>
-      <button onclick="append('6')">6</button>
-      <button class="operator" onclick="append('*')">×</button>
-      <button onclick="append('1')">1</button>
-      <button onclick="append('2')">2</button>
-      <button onclick="append('3')">3</button>
-      <button class="operator" onclick="append('-')">-</button>
-      <button onclick="append('0')">0</button>
-      <button onclick="append('.')">.</button>
-      <button class="equal" onclick="calculate()">=</button>
-      <button class="operator" onclick="append('+')">+</button>
-      <button class="clear" onclick="clearDisplay()">C</button>
-    </div>
+  <h1>Progress Tracker</h1>
+  <div>
+    <input type="number" id="progressInput" min="0" max="100" placeholder="0-100">
+    <button onclick="updateProgress()">Update</button>
   </div>
+  <div class="bar-container">
+    <div class="bar" id="progressBar">0%</div>
+  </div>
+  <div class="info">Masukkan angka antara 0 sampai 100 untuk melihat progress.</div>
+
+  <footer>Progress Tracker © 2025</footer>
 
   <script>
-    function append(value) {
-      document.getElementById('display').value += value;
-    }
-    function clearDisplay() {
-      document.getElementById('display').value = '';
-    }
-    function calculate() {
-      try {
-        document.getElementById('display').value = eval(document.getElementById('display').value);
-      } catch {
-        document.getElementById('display').value = 'Error';
+    function updateProgress() {
+      const input = document.getElementById("progressInput");
+      let value = parseInt(input.value);
+      if (isNaN(value)) value = 0;
+      if (value < 0) value = 0;
+      if (value > 100) value = 100;
+
+      const bar = document.getElementById("progressBar");
+      bar.style.width = value + "%";
+      bar.textContent = value + "%";
+
+      bar.classList.remove("red", "yellow", "green");
+      if (value < 40) {
+        bar.classList.add("red");
+      } else if (value < 70) {
+        bar.classList.add("yellow");
+      } else {
+        bar.classList.add("green");
       }
     }
   </script>
