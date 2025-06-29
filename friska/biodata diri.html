@@ -1,138 +1,67 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Portofolio Dev</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background-color: #f2f2f2;
-        }
-        header {
-            background-color: #1e1e1e;
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        nav {
-            background-color: #333;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            padding: 14px 20px;
-            display: inline-block;
-            text-decoration: none;
-        }
-        nav a:hover {
-            background-color: #555;
-        }
-        section {
-            padding: 30px;
-        }
-        .projects, .testimonials {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            flex: 1;
-            min-width: 200px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        form input, form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 8px;
-            margin-bottom: 16px;
-        }
-        form input[type="submit"] {
-            background-color: #1e1e1e;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        footer {
-            background-color: #1e1e1e;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Produk Unggulan</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; background: #f9f9f9; }
+    header { background: #0e76a8; color: white; text-align: center; padding: 40px 20px; }
+    nav { background: #333; text-align: center; }
+    nav a { color: white; padding: 14px; display: inline-block; text-decoration: none; }
+    nav a:hover { background: #555; }
+    .fitur { display: flex; gap: 20px; padding: 20px; justify-content: center; flex-wrap: wrap; }
+    .fitur .card { background: white; padding: 20px; width: 250px; border-radius: 8px; box-shadow: 0 2px 5px #ccc; }
+    .fitur h3 { color: #0e76a8; }
+    .cta { background: #f1f1f1; text-align: center; padding: 30px; }
+    .cta button { background: #0e76a8; color: white; border: none; padding: 15px 30px; cursor: pointer; font-size: 16px; }
+    .testimoni { padding: 20px; background: #fff; text-align: center; }
+    footer { background: #0e76a8; color: white; text-align: center; padding: 15px; }
+  </style>
 </head>
 <body>
 
 <header>
-    <h1>Portofolio Friska Dev</h1>
-    <p>Frontend & Backend Developer</p>
+  <h1>SmartBottle</h1>
+  <p>Botol Pintar yang Menjaga Hidrasi Anda</p>
 </header>
 
 <nav>
-    <a href="#tentang">Tentang</a>
-    <a href="#proyek">Proyek</a>
-    <a href="#testimoni">Testimoni</a>
-    <a href="#kontak">Kontak</a>
+  <a href="#fitur">Fitur</a>
+  <a href="#testimoni">Testimoni</a>
+  <a href="#beli">Beli</a>
 </nav>
 
-<section id="tentang">
-    <h2>Tentang Saya</h2>
-    <p>Saya adalah developer yang antusias membangun aplikasi web dan mobile. Saya suka dengan UI/UX modern, serta menyukai tantangan backend.</p>
-</section>
-
-<section id="proyek">
-    <h2>Proyek</h2>
-    <div class="projects">
-        <div class="card">
-            <h3>Aplikasi Toko</h3>
-            <p>Sistem kasir berbasis web dengan laporan penjualan.</p>
-        </div>
-        <div class="card">
-            <h3>Website Sekolah</h3>
-            <p>Halaman profil sekolah, berita, dan pendaftaran online.</p>
-        </div>
-        <div class="card">
-            <h3>Blog Teknologi</h3>
-            <p>Blog pribadi dengan CMS buatan sendiri.</p>
-        </div>
+<section id="fitur">
+  <h2 style="text-align:center;">Fitur Unggulan</h2>
+  <div class="fitur">
+    <div class="card">
+      <h3>Sensor Suhu</h3>
+      <p>Menampilkan suhu air secara real-time.</p>
     </div>
-</section>
-
-<section id="testimoni">
-    <h2>Testimoni</h2>
-    <div class="testimonials">
-        <div class="card">
-            <p>"Friska sangat profesional dan cepat tanggap!"</p>
-            <strong>- Klien A</strong>
-        </div>
-        <div class="card">
-            <p>"Proyek selesai tepat waktu dan melebihi ekspektasi."</p>
-            <strong>- Klien B</strong>
-        </div>
+    <div class="card">
+      <h3>Pengingat Minum</h3>
+      <p>Bergetar setiap 2 jam untuk mengingatkan Anda minum.</p>
     </div>
+    <div class="card">
+      <h3>Konektivitas App</h3>
+      <p>Terkoneksi dengan aplikasi ponsel Anda.</p>
+    </div>
+  </div>
 </section>
 
-<section id="kontak">
-    <h2>Kontak</h2>
-    <form>
-        <label>Nama:</label>
-        <input type="text" name="nama" required>
+<section class="testimoni" id="testimoni">
+  <h2>Apa Kata Mereka?</h2>
+  <p>"Botol ini membantu saya tetap sehat dan terhidrasi!" - Rina</p>
+  <p>"Sangat berguna untuk pekerja kantoran." - Dodi</p>
+</section>
 
-        <label>Email:</label>
-        <input type="email" name="email" required>
-
-        <label>Pesan:</label>
-        <textarea name="pesan" rows="4" required></textarea>
-
-        <input type="submit" value="Kirim Pesan">
-    </form>
+<section class="cta" id="beli">
+  <h2>Dapatkan SmartBottle Sekarang!</h2>
+  <button>Beli Sekarang</button>
 </section>
 
 <footer>
-    <p>&copy; 2025 Friska Developer. All rights reserved.</p>
+  <p>&copy; 2025 SmartBottle Indonesia</p>
 </footer>
 
 </body>
