@@ -2,25 +2,24 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Survey Pendapat</title>
+  <title>Pemesanan Produk</title>
 </head>
 <body>
-  <h2>Survey Pendapat Anda</h2>
+  <h2>Formulir Pemesanan Produk</h2>
   <form>
-    <label>Nama:</label><br>
+    <label>Nama Produk:</label><br>
+    <input type="text" name="produk"><br><br>
+
+    <label>Jumlah:</label><br>
+    <input type="number" name="jumlah"><br><br>
+
+    <label>Nama Pemesan:</label><br>
     <input type="text" name="nama"><br><br>
 
-    <label>Umur:</label><br>
-    <input type="number" name="umur"><br><br>
+    <label>Alamat Pengiriman:</label><br>
+    <textarea name="alamat"></textarea><br><br>
 
-    <label>Apakah Anda puas dengan layanan kami?</label><br>
-    <input type="radio" name="puas" value="ya"> Ya
-    <input type="radio" name="puas" value="tidak"> Tidak<br><br>
-
-    <label>Komentar:</label><br>
-    <textarea name="komentar"></textarea><br><br>
-
-    <button type="submit">Kirim</button>
+    <button type="submit">Pesan Sekarang</button>
   </form>
 </body>
 </html>
