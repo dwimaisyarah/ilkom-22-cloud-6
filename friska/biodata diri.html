@@ -2,56 +2,97 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Testimoni Pengguna</title>
+  <title>Progress Tracker</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
-    blockquote { background: #fff; padding: 15px; border-left: 5px solid #4CAF50; margin-bottom: 10px; }
-    em { color: #555; }
-    .rating { color: gold; }
-    form { background: #fff; padding: 15px; margin-top: 20px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 30px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    input[type="number"] {
+      padding: 10px;
+      width: 80px;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .bar-container {
+      width: 100%;
+      max-width: 600px;
+      height: 30px;
+      background: #ddd;
+      margin: 30px auto;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .bar {
+      height: 100%;
+      background: #4CAF50;
+      width: 0;
+      text-align: right;
+      line-height: 30px;
+      color: white;
+      font-weight: bold;
+      padding-right: 10px;
+      transition: width 0.4s ease;
+    }
+    .info {
+      margin-top: 10px;
+      color: #333;
+      font-size: 14px;
+    }
+    footer {
+      margin-top: 50px;
+      font-size: 13px;
+      color: #666;
+    }
+    .bar.red { background: #f44336; }
+    .bar.yellow { background: #FF9800; }
+    .bar.green { background: #4CAF50; }
   </style>
 </head>
 <body>
-  <h2>Apa Kata Mereka?</h2>
-  <blockquote>
-    <span class="rating">★★★★★</span><br>
-    "Layanannya cepat dan ramah!" - <em>Sinta</em>
-  </blockquote>
-  <blockquote>
-    <span class="rating">★★★★☆</span><br>
-    "Produk sangat bagus dan berkualitas." - <em>Rico</em>
-  </blockquote>
-  <blockquote>
-    <span class="rating">★★★★★</span><br>
-    "Sangat puas dengan pelayanannya." - <em>Andi</em>
-  </blockquote>
-  <blockquote>
-    <span class="rating">★★★★☆</span><br>
-    "Pengiriman cepat dan produk sesuai harapan." - <em>Maria</em>
-  </blockquote>
-  <blockquote>
-    <span class="rating">★★★☆☆</span><br>
-    "Lumayan, tapi kemasan bisa lebih baik." - <em>Bayu</em>
-  </blockquote>
+  <h1>Progress Tracker</h1>
+  <div>
+    <input type="number" id="progressInput" min="0" max="100" placeholder="0-100">
+    <button onclick="updateProgress()">Update</button>
+  </div>
+  <div class="bar-container">
+    <div class="bar" id="progressBar">0%</div>
+  </div>
+  <div class="info">Masukkan angka antara 0 sampai 100 untuk melihat progress.</div>
 
-  <h3>Kirim Testimoni Anda:</h3>
-  <form>
-    <label>Nama:</label><br>
-    <input type="text" name="nama"><br><br>
+  <footer>Progress Tracker © 2025</footer>
 
-    <label>Rating:</label><br>
-    <select name="rating">
-      <option value="5">★★★★★</option>
-      <option value="4">★★★★☆</option>
-      <option value="3">★★★☆☆</option>
-      <option value="2">★★☆☆☆</option>
-      <option value="1">★☆☆☆☆</option>
-    </select><br><br>
+  <script>
+    function updateProgress() {
+      const input = document.getElementById("progressInput");
+      let value = parseInt(input.value);
+      if (isNaN(value)) value = 0;
+      if (value < 0) value = 0;
+      if (value > 100) value = 100;
 
-    <label>Pesan:</label><br>
-    <textarea name="pesan" rows="4" cols="40"></textarea><br><br>
+      const bar = document.getElementById("progressBar");
+      bar.style.width = value + "%";
+      bar.textContent = value + "%";
 
-    <button type="submit">Kirim Testimoni</button>
-  </form>
+      bar.classList.remove("red", "yellow", "green");
+      if (value < 40) {
+        bar.classList.add("red");
+      } else if (value < 70) {
+        bar.classList.add("yellow");
+      } else {
+        bar.classList.add("green");
+      }
+    }
+  </script>
 </body>
 </html>
