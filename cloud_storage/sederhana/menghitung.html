@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana</title>
+</head>
+<body>
+    <h1>Kalkulator Sederhana</h1>
+    <input type="number" id="angka1" placeholder="Angka 1">
+    <input type="number" id="angka2" placeholder="Angka 2">
+    <br>
+    <button onclick="hitung('+')">Tambah</button>
+    <button onclick="hitung('-')">Kurang</button>
+    <button onclick="hitung('*')">Kali</button>
+    <button onclick="hitung('/')">Bagi</button>
+    <br>
+    <div id="hasil"></div>
+
+    <script>
+        function hitung(operator) {
+            const a = parseFloat(document.getElementById('angka1').value);
+            const b = parseFloat(document.getElementById('angka2').value);
+            let hasil;
+
+            switch (operator) {
+                case '+': hasil = a + b; break;
+                case '-': hasil = a - b; break;
+                case '*': hasil = a * b; break;
+                case '/': hasil = b !== 0 ? a / b : 'Error: Pembagian dengan nol!'; break;
+            }
+            document.getElementById('hasil').innerText = "Hasil: " + hasil;
+        }
+    </script>
+</body>
+</html>
