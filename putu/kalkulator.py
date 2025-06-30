@@ -29,7 +29,7 @@ def main():
     except ValueError:
         print("Input tidak valid. Harus berupa angka.")
         return
-     if pilihan == '1':
+    if pilihan == '1':
         hasil = tambah(angka1, angka2)
         operasi = "+"
     elif pilihan == '2':
