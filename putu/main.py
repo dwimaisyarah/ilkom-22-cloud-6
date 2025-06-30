@@ -46,3 +46,7 @@ while True:
         print("Input tidak boleh kosong.")
         input_angka = input("Masukkan angka romawi:")
         continue
+    if len(input_angka)>15:
+        print("input terlalu panjang")
+        input_angka = input("Masukkan angka romawi yang lebih pendek:")
+        continue
