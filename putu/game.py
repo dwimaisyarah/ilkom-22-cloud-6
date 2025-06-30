@@ -15,3 +15,8 @@ while attempts > 0:
     else:
         attempts -= 1
         print("Wrong guess! Attempts left: " + str(attempts))
+        if '_' not in guessedWord:
+        print("\nCongratulations!! You guessed the word: " + word)
+        break
+else:
+    print("\nYou've run out of attempts! The word was: " + word)
