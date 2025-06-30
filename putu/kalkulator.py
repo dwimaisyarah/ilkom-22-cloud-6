@@ -17,3 +17,15 @@ def main():
     print("2. Kurang (-)")
     print("3. Kali (*)")
     print("4. Bagi (/)")
+    pilihan = input("Masukkan pilihan (1/2/3/4): ")
+
+    if pilihan not in ['1', '2', '3', '4']:
+        print("Pilihan tidak valid.")
+        return
+
+    try:
+        angka1 = float(input("Masukkan angka pertama: "))
+        angka2 = float(input("Masukkan angka kedua: "))
+    except ValueError:
+        print("Input tidak valid. Harus berupa angka.")
+        return
