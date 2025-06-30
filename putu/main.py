@@ -50,3 +50,7 @@ while True:
         print("input terlalu panjang")
         input_angka = input("Masukkan angka romawi yang lebih pendek:")
         continue
+    if any(input_angka.count(karakter)>3 for karakter in "IVXLCDM"):
+        print("Input tidak valid. Karakter I, V, X, L, C, D, M tidak boleh muncul lebih dari 3 kali berturut-turut.")
+        input_angka = input("Masukkan angka romawi yang valid:")
+        continue
