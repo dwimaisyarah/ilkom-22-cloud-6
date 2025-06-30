@@ -11,3 +11,6 @@ def roman_to_int(numeral):
         if "XC" in numeral:
             final_answer += 90
             numeral = numeral.replace("XC", "")
+        if "XL" in numeral:
+            final_answer += 40
+            numeral = numeral.replace("XL", "")
