@@ -41,3 +41,7 @@ def main():
     elif pilihan == '4':
         hasil = bagi(angka1, angka2)
         operasi = "/"
+        print(f"Hasil: {angka1} {operasi} {angka2} = {hasil}")
+
+if _name_ == "_main_":
+    main()
