@@ -56,3 +56,4 @@ while True:
         continue
     hasil = roman_to_int(input_angka)
     print("Angka romawi " + input_angka + " adalah " + str(hasil) + " dalam angka biasa.")
+    pilihan = input("Apakah ingin melanjutkan? (y/n): ").lower()
