@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Monitoring Kesehatan Harian</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Dashboard Kesehatan Harian</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#langkah">Langkah Kaki</a></li>
+      <li><a href="#kalori">Kalori</a></li>
+      <li><a href="#tidur">Tidur</a></li>
+      <li><a href="#detak">Detak Jantung</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Statistik Ringkasan -->
+    <section id="summary">
+      <h2>Ringkasan Hari Ini</h2>
+      <div class="card-container">
+        <div class="card" id="card-langkah">
+          <h3>Langkah</h3>
+          <p id="jumlah-langkah">0</p>
+        </div>
+        <div class="card" id="card-kalori">
+          <h3>Kalori</h3>
+          <p id="jumlah-kalori">0</p>
+        </div>
+        <div class="card" id="card-tidur">
+          <h3>Tidur</h3>
+          <p id="jumlah-tidur">0</p>
+        </div>
+        <div class="card" id="card-detak">
+          <h3>Detak Jantung</h3>
+          <p id="jumlah-detak">0</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grafik Langkah Kaki -->
+    <section id="langkah">
+      <h2>Langkah Kaki per Hari</h2>
+      <canvas id="chartLangkah"></canvas>
+    </section>
+
+    <!-- Grafik Kalori -->
+    <section id="kalori">
+      <h2>Kalori Terbakar per Hari</h2>
+      <canvas id="chartKalori"></canvas>
+    </section>
+
+    <!-- Grafik Tidur -->
+    <section id="tidur">
+      <h2>Durasi Tidur</h2>
+      <canvas id="chartTidur"></canvas>
+    </section>
+
+    <!-- Grafik Detak Jantung -->
+    <section id="detak">
+      <h2>Detak Jantung</h2>
+      <canvas id="chartDetak"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Dashboard Kesehatan | Dibuat oleh Kamu</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+/* style.css - Gaya untuk Dashboard Kesehatan Harian */
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+nav {
+  background-color: #343a40;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+
+nav ul li {
+  flex: 1;
+  text-align: center;
+}
+
+nav ul li a {
+  display: block;
+  padding: 0.75rem;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+nav ul li a:hover {
+  background-color: #495057;
+}
+
+main {
+  padding: 2rem;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  color: #007bff;
+}
+
+canvas {
+  width: 100% !important;
+  max-width: 600px;
+  height: auto !important;
+  margin: 0 auto;
+  display: block;
+}
+
+footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+// script.js - Mengelola data dan grafik dashboard
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Data dummy kesehatan per hari
+  const dataKesehatan = [
+    { tanggal: "2025-06-24", langkah: 4500, kalori: 250, tidur: 6.5, detak: 78 },
+    { tanggal: "2025-06-25", langkah: 6700, kalori: 320, tidur: 7.2, detak: 75 },
+    { tanggal: "2025-06-26", langkah: 8500, kalori: 400, tidur: 8.1, detak: 72 },
+    { tanggal: "2025-06-27", langkah: 7200, kalori: 360, tidur: 7.8, detak: 76 },
+    { tanggal: "2025-06-28", langkah: 6100, kalori: 300, tidur: 6.9, detak: 80 },
+    { tanggal: "2025-06-29", langkah: 7800, kalori: 380, tidur: 7.5, detak: 74 },
+    { tanggal: "2025-06-30", langkah: 9100, kalori: 420, tidur: 8.2, detak: 70 }
+  ];
+
+  // Tampilkan ringkasan hari terakhir
+  const today = dataKesehatan[dataKesehatan.length - 1];
+  document.getElementById("jumlah-langkah").textContent = today.langkah + " langkah";
+  document.getElementById("jumlah-kalori").textContent = today.kalori + " kkal";
+  document.getElementById("jumlah-tidur").textContent = today.tidur + " jam";
+  document.getElementById("jumlah-detak").textContent = today.detak + " bpm";
+
+  // Ambil label tanggal
+  const labels = dataKesehatan.map(d => d.tanggal);
+
+  // Fungsi untuk membuat chart
+  function buatChart(idCanvas, label, data, warna) {
+    const ctx = document.getElementById(idCanvas).getContext("2d");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: label,
+            data: data,
+            backgroundColor: warna + "55",
+            borderColor: warna,
+            fill: true,
+            tension: 0.4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "top" },
+          tooltip: { mode: "index", intersect: false }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  // Buat grafik-grafik
+  buatChart("chartLangkah", "Langkah", dataKesehatan.map(d => d.langkah), "#007bff");
+  buatChart("chartKalori", "Kalori (kkal)", dataKesehatan.map(d => d.kalori), "#28a745");
+  buatChart("chartTidur", "Tidur (jam)", dataKesehatan.map(d => d.tidur), "#ffc107");
+  buatChart("chartDetak", "Detak Jantung (bpm)", dataKesehatan.map(d => d.detak), "#dc3545");
+});
+/* style.css - Gaya untuk Dashboard Kesehatan Harian */
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+nav {
+  background-color: #343a40;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+
+nav ul li {
+  flex: 1;
+  text-align: center;
+}
+
+nav ul li a {
+  display: block;
+  padding: 0.75rem;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+nav ul li a:hover {
+  background-color: #495057;
+}
+
+main {
+  padding: 2rem;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  color: #007bff;
+}
+
+canvas {
+  width: 100% !important;
+  max-width: 600px;
+  height: auto !important;
+  margin: 0 auto;
+  display: block;
+}
+
+#form-input form {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#form-input label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#form-input input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 60%;
+}
+
+#form-input button {
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#form-input button:hover {
+  background-color: #0056b3;
+}
+
+footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
