@@ -20,3 +20,25 @@ def roman_to_int(numeral):
         if "IV" in numeral:
             final_answer += 4
             numeral = numeral.replace("IV", "")
+            
+        for i in numeral:
+            if i == "M":
+                final_answer += 1000
+            elif i == "D":
+                final_answer += 500
+            elif i == "C":
+                final_answer += 100
+            elif i == "L":
+                final_answer += 50
+            elif i == "X":
+                final_answer += 10
+            elif i == "V":
+                final_answer += 5
+            elif i == "I":
+                final_answer += 1
+        return final_answer
+while True:
+    if not all(karakter in "IVXLCDM" for karakter in input_angka):
+        print("Input tidak valid")
+        input_angka = input("Masukkan angka romawi yang valid:")
+        continue
