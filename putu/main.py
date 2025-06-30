@@ -42,3 +42,7 @@ while True:
         print("Input tidak valid")
         input_angka = input("Masukkan angka romawi yang valid:")
         continue
+    if input_angka == "":
+        print("Input tidak boleh kosong.")
+        input_angka = input("Masukkan angka romawi:")
+        continue
