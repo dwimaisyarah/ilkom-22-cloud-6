@@ -29,3 +29,15 @@ def main():
     except ValueError:
         print("Input tidak valid. Harus berupa angka.")
         return
+     if pilihan == '1':
+        hasil = tambah(angka1, angka2)
+        operasi = "+"
+    elif pilihan == '2':
+        hasil = kurang(angka1, angka2)
+        operasi = "-"
+    elif pilihan == '3':
+        hasil = kali(angka1, angka2)
+        operasi = "*"
+    elif pilihan == '4':
+        hasil = bagi(angka1, angka2)
+        operasi = "/"
