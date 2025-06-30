@@ -57,3 +57,8 @@ while True:
     hasil = roman_to_int(input_angka)
     print("Angka romawi " + input_angka + " adalah " + str(hasil) + " dalam angka biasa.")
     pilihan = input("Apakah ingin melanjutkan? (y/n): ").lower()
+    if pilihan == "y":
+        input_angka = input("Masukkan angka romawi:")
+    else:
+        print("Terima kasih telah menggunakan program ini!")
+        break
