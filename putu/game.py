@@ -6,3 +6,4 @@ attempts = 10
 
 while attempts > 0:
     print("\nCurrent word: " + ' '.join(guessedWord))
+    guess = input("Guess a letter: ").lower()
