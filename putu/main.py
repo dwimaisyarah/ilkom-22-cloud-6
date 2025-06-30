@@ -54,3 +54,4 @@ while True:
         print("Input tidak valid. Karakter I, V, X, L, C, D, M tidak boleh muncul lebih dari 3 kali berturut-turut.")
         input_angka = input("Masukkan angka romawi yang valid:")
         continue
+    hasil = roman_to_int(input_angka)
