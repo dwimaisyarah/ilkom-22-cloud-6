@@ -55,3 +55,4 @@ while True:
         input_angka = input("Masukkan angka romawi yang valid:")
         continue
     hasil = roman_to_int(input_angka)
+    print("Angka romawi " + input_angka + " adalah " + str(hasil) + " dalam angka biasa.")
