@@ -5,3 +5,6 @@ def roman_to_int(numeral):
         if "CM" in numeral:
             final_answer += 900
             numeral = numeral.replace("CM", "")
+        if "CD" in numeral:
+            final_answer += 400
+            numeral = numeral.replace("CD", "")
