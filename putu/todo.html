@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catatan Harian Lengkap</title>
+
+  <!-- CSS -->
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #222222;
+      --card: #f9f9f9;
+      --primary: #4A90E2;
+      --danger: #e74c3c;
+    }
+
+    .dark {
+      --bg: #1e1e1e;
+      --text: #f1f1f1;
+      --card: #2c2c2c;
+      --primary: #4A90E2;
+      --danger: #e74c3c;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    input[type="text"], input[type="date"] {
+      padding: 10px;
+      margin: 5px 0;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      margin-top: 10px;
+      background-color: var(--primary);
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #357abd;
+    }
+
+    .note-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .note-item {
+      background-color: var(--card);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .note-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .note-header h3 {
+      margin: 0;
+    }
+
+    .note-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .note-actions button {
+      flex: 1;
+    }
+
+    .btn-hapus {
+      background-color: var(--danger);
+    }
+
+    footer {
+      background-color: var(--primary);
+      text-align: center;
+      color: white;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🗒️ Catatan Harian</h1>
+    <button id="modeToggle">🌙 Mode Gelap</button>
+  </header>
+
+  <main>
+    <section class="form-section">
+      <input type="text" id="noteInput" placeholder="Tulis catatan baru...">
+      <input type="date" id="noteDate">
+      <button onclick="tambahCatatan()">➕ Tambah</button>
+    </section>
+
+    <section class="search-section">
+      <input type="text" id="searchInput" placeholder="Cari catatan..." oninput="cariCatatan()">
+      <input type="date" id="filterDate" onchange="filterTanggal()">
+    </section>
+
+    <section id="noteList" class="note-list">
+      <!-- Daftar catatan tampil di sini -->
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 - Aplikasi Catatan Harian by Kamu</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    let semuaCatatan = [];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      muatCatatan();
+      document.getElementById("modeToggle").addEventListener("click", toggleMode);
+    });
+
+    function tambahCatatan() {
+      const isi = document.getElementById("noteInput").value.trim();
+      const tanggal = document.getElementById("noteDate").value;
+      if (!isi || !tanggal) {
+        alert("Catatan dan tanggal wajib diisi!");
+        return;
+      }
+      const catatan = { id: Date.now(), isi, tanggal };
+      semuaCatatan.push(catatan);
+      simpanCatatan();
+      resetForm();
+      tampilkanCatatan(semuaCatatan);
+    }
+
+    function simpanCatatan() {
+      localStorage.setItem("catatan", JSON.stringify(semuaCatatan));
+    }
+
+    function muatCatatan() {
+      const data = localStorage.getItem("catatan");
+      semuaCatatan = data ? JSON.parse(data) : [];
+      tampilkanCatatan(semuaCatatan);
+    }
+
+    function tampilkanCatatan(data) {
+      const list = document.getElementById("noteList");
+      list.innerHTML = "";
+      if (data.length === 0) {
+        list.innerHTML = "<p>Belum ada catatan.</p>";
+        return;
+      }
+      data.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "note-item";
+        div.innerHTML = `
+          <div class="note-header">
+            <h3>${item.isi}</h3>
+            <small>${item.tanggal}</small>
+          </div>
+          <div class="note-actions">
+            <button onclick="editCatatan(${item.id})">Edit</button>
+            <button class="btn-hapus" onclick="hapusCatatan(${item.id})">Hapus</button>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function hapusCatatan(id) {
+      if (confirm("Yakin ingin menghapus catatan ini?")) {
+        semuaCatatan = semuaCatatan.filter(item => item.id !== id);
+        simpanCatatan();
+        tampilkanCatatan(semuaCatatan);
+      }
+    }
+
+    function editCatatan(id) {
+      const catatan = semuaCatatan.find(item => item.id === id);
+      document.getElementById("noteInput").value = catatan.isi;
+      document.getElementById("noteDate").value = catatan.tanggal;
+      hapusCatatan(id);
+    }
+
+    function resetForm() {
+      document.getElementById("noteInput").value = "";
+      document.getElementById("noteDate").value = "";
+    }
+
+    function cariCatatan() {
+      const keyword = document.getElementById("searchInput").value.toLowerCase();
+      const hasil = semuaCatatan.filter(item => item.isi.toLowerCase().includes(keyword));
+      tampilkanCatatan(hasil);
+    }
+
+    function filterTanggal() {
+      const tanggal = document.getElementById("filterDate").value;
+      if (!tanggal) {
+        tampilkanCatatan(semuaCatatan);
+        return;
+      }
+      const hasil = semuaCatatan.filter(item => item.tanggal === tanggal);
+      tampilkanCatatan(hasil);
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle("dark");
+      const tombol = document.getElementById("modeToggle");
+      tombol.textContent = document.body.classList.contains("dark") ? "☀️ Mode Terang" : "🌙 Mode Gelap";
+    }
+  </script>
+</body>
+</html>
+
+
