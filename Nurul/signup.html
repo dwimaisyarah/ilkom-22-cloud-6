@@ -98,6 +98,133 @@
     <div class="login-link">
       Already have an account? <a href="/">Login here</a>
     </div>
+  </div><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup page</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .signup-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      width: 350px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #3498db;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 15px;
+      transition: border 0.2s ease-in-out;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+
+    button[type="submit"] {
+      background-color: #3498db;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 10px;
+      font-size: smaller;
+      color: #333;
+    }
+
+    .login-link a {
+      color: #3498db;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #777;
+      margin-top: -10px;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #aaa;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h1>Signup</h1>
+    <form action="/signup" method="post">
+      <label for="name">Name:</label>
+      <input type="text" required autofocus name="name" id="name" placeholder="Enter your name">
+
+      <label for="email">Email:</label>
+      <input type="text" required name="email" id="email" placeholder="Enter your email address">
+
+      <label for="password">Password:</label>
+      <input type="password" required name="password" id="password" placeholder="Minimum 12 characters">
+      <div class="note">Password must be at least 12 characters.</div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="login-link">
+      Already have an account? <a href="/">Login here</a>
+    </div>
   </div>
+
+  <footer>&copy; 2025 Blog App. All rights reserved.</footer>
+</body>
+</html>
+
 </body>
 </html>
